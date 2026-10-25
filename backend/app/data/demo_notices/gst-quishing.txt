@@ -1,0 +1,9 @@
+“GSTN Compliance & Enforcement Cell”
+REG-17 SPOOF
+Claimed Form GST REG-17
+Date of issue: 2026-10-23
+Response within 1 days
+Total demand: INR 14999
+Pay ₹14,999 via QR code within 4 hours or GSTIN and bank account will be frozen immediately. upi://pay?pa=gst.penalty.desk@okicici&am=14999
+PAN: ABCDE1234F
+Aadhaar: 2345 6789 0123

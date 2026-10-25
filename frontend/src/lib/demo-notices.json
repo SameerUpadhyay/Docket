@@ -1,0 +1,370 @@
+[
+  {
+    "id": "gst-quishing",
+    "ingested_at": "2026-10-24T09:00:00+05:30",
+    "ingestion_channel": "DEMO_FIXTURE",
+    "state": "PHISHING_QUARANTINED",
+    "severity": "PHISHING_SCAM",
+    "deterministic_risk_score": 100,
+    "forensics": {
+      "verdict": "PHISHING_SCAM",
+      "fraud_risk_score": 100,
+      "sender_email": "compliance-alert@gst-portal-verify.in",
+      "sender_domain": "gst-portal-verify.in",
+      "dkim_passed": true,
+      "spf_passed": true,
+      "din_extracted": null,
+      "din_format_valid": false,
+      "scam_flags": [
+        "Lookalike / unofficial sender: gst-portal-verify.in. Confirm the sender independently.",
+        "Payment redirection: private UPI / QR payment payload detected."
+      ],
+      "safe_to_process": false,
+      "verification_note": "Simulated fixture signals. DIN format is not live portal verification."
+    },
+    "limitation": null,
+    "triage": null,
+    "redacted_ocr_excerpt": "“GSTN Compliance & Enforcement Cell”\nREG-17 SPOOF\nClaimed Form GST REG-17\nDate of issue: 2026-10-23\nResponse within 1 days\nTotal demand: INR 14999\nPay ₹14,999 via QR code within 4 hours or GSTIN and bank account will be frozen immediately. upi://pay?pa=gst.penalty.desk@okicici&am=14999\nPAN: [REDACTED_PAN_1]\nAadhaar: [REDACTED_AADHAAR_2]",
+    "pii_tokens_redacted_count": 2,
+    "is_demo": true,
+    "analysis_mode": "deterministic-demo",
+    "original_filename": "gst-quishing.txt",
+    "review_notes": [
+      "Demo reference date: 24 October 2026. Figures and identities are fictional."
+    ],
+    "draft_reply": null
+  },
+  {
+    "id": "gst-asmt-10",
+    "ingested_at": "2026-10-15T09:00:00+05:30",
+    "ingestion_channel": "DEMO_FIXTURE",
+    "state": "TRIAGED",
+    "severity": "AMBER",
+    "deterministic_risk_score": 59,
+    "forensics": {
+      "verdict": "VERIFIED_GOV",
+      "fraud_risk_score": 0,
+      "sender_email": "superintendent.cgst@cbic.gov.in",
+      "sender_domain": "cbic.gov.in",
+      "dkim_passed": true,
+      "spf_passed": true,
+      "din_extracted": "DIN: CBIC-20261067B892104432",
+      "din_format_valid": true,
+      "scam_flags": [],
+      "safe_to_process": true,
+      "verification_note": "Simulated fixture signals. DIN format is not live portal verification."
+    },
+    "limitation": {
+      "date_of_issue": "2026-10-14",
+      "date_of_service": "2026-10-15",
+      "statutory_window_days": 15,
+      "raw_expiry_date": "2026-10-30",
+      "holiday_rollover_applied": false,
+      "holiday_reason": null,
+      "effective_legal_deadline": "2026-10-30",
+      "days_remaining": 6,
+      "next_watchdog_alert": "T-3 · 2026-10-27 · 09:00 IST",
+      "requires_review": true,
+      "calculation_note": "Planning estimate. Confirm the prescribed period, service date and applicable office calendar."
+    },
+    "triage": {
+      "issuing_authority": "Office of the Superintendent, CGST Range-III, Mumbai",
+      "notice_type_title": "Input tax credit mismatch",
+      "statutory_act_and_section": "Section 61 · CGST Act, 2017 · Rule 99(1)",
+      "plain_english_summary": "Your GSTR-3B claims ₹1,42,850 more input tax credit than your GSTR-2B shows. Two suppliers — Apex Fasteners and Surya Packaging — filed their returns late. Reconcile the invoices and explain the difference to the GST officer.",
+      "core_allegation_or_query": "Your GSTR-3B claims ₹1,42,850 more input tax credit than your GSTR-2B shows. Two suppliers — Apex Fasteners and Surya Packaging — filed their returns late. Reconcile the invoices and explain the difference to the GST officer.",
+      "financial_demand_inr": 142850.0,
+      "date_of_issue_iso": "2026-10-14",
+      "response_window_days": 15,
+      "has_criminal_or_arrest_clause": false,
+      "has_bank_freeze_or_eway_block_threat": false,
+      "recommended_professional": "Chartered Accountant",
+      "professional_reason": "Reconcile the credit difference with your CA before filing a response.",
+      "required_documents": [
+        {
+          "doc_id": "doc-1",
+          "document_name": "Invoice-wise ITC reconciliation",
+          "why_needed": "Explains the difference between GSTR-2B and GSTR-3B.",
+          "source_hint": "GST portal → Returns → GSTR-2B; reconcile with your books.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-2",
+          "document_name": "Supplier invoices & e-Way bills",
+          "why_needed": "Supports the purchases from Apex Fasteners and Surya Packaging.",
+          "source_hint": "Purchase register → supplier invoices for FY 2025–26, Q2.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-3",
+          "document_name": "Proof of supplier payments",
+          "why_needed": "Documents the dates and amounts paid to the suppliers.",
+          "source_hint": "Your bank → Account statement → relevant transactions.",
+          "is_collected": false,
+          "attachment_name": null
+        }
+      ],
+      "draft_reply_template": "To,\nOffice of the Superintendent, CGST Range-III, Mumbai\n\nSubject: Response to GST ASMT-10\nReference: [NOTICE_REFERENCE]\n\nRespected Sir / Madam,\n\nWe acknowledge receipt of the above communication on [DATE_OF_RECEIPT]. We submit the following for your consideration, subject to verification of the records.\n\n1. [FACTUAL_EXPLANATION_WITHOUT_UNVERIFIED_ADMISSIONS]\n2. [RECONCILIATION_OR_PAYMENT_DETAILS]\n3. Supporting records are indexed in the attached evidence list.\n\nWe request that the enclosed records be considered and an opportunity to clarify any remaining issues be provided.\n\nYours faithfully,\n[AUTHORIZED_SIGNATORY]\n[BUSINESS_NAME]\n[DATE]\n\nDRAFT FOR PROFESSIONAL REVIEW — verify all facts before signing or submission.",
+      "vernacular_summary_hindi": "आपके GSTR-3B में GSTR-2B से ₹1,42,850 अधिक इनपुट टैक्स क्रेडिट है। दो आपूर्तिकर्ताओं ने रिटर्न देर से भरा है। बिलों का मिलान करके GST अधिकारी को अंतर का जवाब दें।"
+    },
+    "redacted_ocr_excerpt": "Office of the Superintendent, CGST Range-III, Mumbai\nGST ASMT-10\nSection 61 · CGST Act, 2017 · Rule 99(1)\nDate of issue: 2026-10-14\nResponse within 15 days\nTotal demand: INR 142850\nDIN: CBIC-20261067B892104432\nYour GSTR-3B claims ₹1,42,850 more input tax credit than your GSTR-2B shows. Two suppliers — Apex Fasteners and Surya Packaging — filed their returns late. Reconcile the invoices and explain the difference to the GST officer.\nPAN: [REDACTED_PAN_1]\nAadhaar: [REDACTED_AADHAAR_2]",
+    "pii_tokens_redacted_count": 2,
+    "is_demo": true,
+    "analysis_mode": "deterministic-demo",
+    "original_filename": "gst-asmt-10.txt",
+    "review_notes": [
+      "Demo reference date: 24 October 2026. Figures and identities are fictional."
+    ],
+    "draft_reply": null
+  },
+  {
+    "id": "cheque-section-138",
+    "ingested_at": "2026-10-12T09:00:00+05:30",
+    "ingestion_channel": "DEMO_FIXTURE",
+    "state": "TRIAGED",
+    "severity": "RED",
+    "deterministic_risk_score": 99,
+    "forensics": {
+      "verdict": "PRIVATE_LEGAL_NOTICE",
+      "fraud_risk_score": 0,
+      "sender_email": "rao.legal.chambers@gmail.com",
+      "sender_domain": "gmail.com",
+      "dkim_passed": true,
+      "spf_passed": true,
+      "din_extracted": null,
+      "din_format_valid": false,
+      "scam_flags": [],
+      "safe_to_process": true,
+      "verification_note": "Simulated fixture signals. DIN format is not live portal verification."
+    },
+    "limitation": {
+      "date_of_issue": "2026-10-10",
+      "date_of_service": "2026-10-12",
+      "statutory_window_days": 15,
+      "raw_expiry_date": "2026-10-27",
+      "holiday_rollover_applied": false,
+      "holiday_reason": null,
+      "effective_legal_deadline": "2026-10-27",
+      "days_remaining": 3,
+      "next_watchdog_alert": "T-3 · 2026-10-24 · 09:00 IST",
+      "requires_review": true,
+      "calculation_note": "Planning estimate. Confirm the prescribed period, service date and applicable office calendar."
+    },
+    "triage": {
+      "issuing_authority": "Chambers of Adv. Rajeshwar Rao, Mumbai",
+      "notice_type_title": "Cheque dishonour demand",
+      "statutory_act_and_section": "Section 138 · Negotiable Instruments Act, 1881",
+      "plain_english_summary": "Cheque 048921 for ₹4,80,000 was returned for insufficient funds. The sender demands payment within 15 days of receipt. Take the notice and bank memo to an advocate promptly to assess payment or a response.",
+      "core_allegation_or_query": "Cheque 048921 for ₹4,80,000 was returned for insufficient funds. The sender demands payment within 15 days of receipt. Take the notice and bank memo to an advocate promptly to assess payment or a response.",
+      "financial_demand_inr": 480000.0,
+      "date_of_issue_iso": "2026-10-10",
+      "response_window_days": 15,
+      "has_criminal_or_arrest_clause": true,
+      "has_bank_freeze_or_eway_block_threat": false,
+      "recommended_professional": "Advocate",
+      "professional_reason": "A dishonoured cheque demand can involve criminal proceedings. Obtain advocate review promptly.",
+      "required_documents": [
+        {
+          "doc_id": "doc-1",
+          "document_name": "Notice & postal delivery record",
+          "why_needed": "Establishes the exact receipt date and demand.",
+          "source_hint": "Registered post envelope, tracking receipt and original notice.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-2",
+          "document_name": "Cheque copy & bank return memo",
+          "why_needed": "Records the instrument and stated reason for dishonour.",
+          "source_hint": "Bank branch → Cheque return memo.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-3",
+          "document_name": "Contract & payment correspondence",
+          "why_needed": "Helps the advocate assess the underlying liability.",
+          "source_hint": "Purchase agreement, invoices and correspondence.",
+          "is_collected": false,
+          "attachment_name": null
+        }
+      ],
+      "draft_reply_template": "To,\nChambers of Adv. Rajeshwar Rao, Mumbai\n\nSubject: Response to LEGAL DEMAND\nReference: [NOTICE_REFERENCE]\n\nRespected Sir / Madam,\n\nWe acknowledge receipt of the above communication on [DATE_OF_RECEIPT]. We submit the following for your consideration, subject to verification of the records.\n\n1. [FACTUAL_EXPLANATION_WITHOUT_UNVERIFIED_ADMISSIONS]\n2. [RECONCILIATION_OR_PAYMENT_DETAILS]\n3. Supporting records are indexed in the attached evidence list.\n\nWe request that the enclosed records be considered and an opportunity to clarify any remaining issues be provided.\n\nYours faithfully,\n[AUTHORIZED_SIGNATORY]\n[BUSINESS_NAME]\n[DATE]\n\nDRAFT FOR PROFESSIONAL REVIEW — verify all facts before signing or submission.",
+      "vernacular_summary_hindi": "₹4,80,000 का चेक 048921 अपर्याप्त राशि के कारण लौट गया। प्राप्ति के 15 दिनों के भीतर भुगतान की मांग है। नोटिस और बैंक मेमो लेकर तुरंत वकील से सलाह लें।"
+    },
+    "redacted_ocr_excerpt": "Chambers of Adv. Rajeshwar Rao, Mumbai\nLEGAL DEMAND\nSection 138 · Negotiable Instruments Act, 1881\nDate of issue: 2026-10-10\nResponse within 15 days\nTotal demand: INR 480000\nCheque 048921 for ₹4,80,000 was returned for insufficient funds. The sender demands payment within 15 days of receipt. Take the notice and bank memo to an advocate promptly to assess payment or a response.\nPAN: [REDACTED_PAN_1]\nAadhaar: [REDACTED_AADHAAR_2]",
+    "pii_tokens_redacted_count": 2,
+    "is_demo": true,
+    "analysis_mode": "deterministic-demo",
+    "original_filename": "cheque-section-138.txt",
+    "review_notes": [
+      "Demo reference date: 24 October 2026. Figures and identities are fictional."
+    ],
+    "draft_reply": null
+  },
+  {
+    "id": "income-tax-143",
+    "ingested_at": "2026-10-04T09:00:00+05:30",
+    "ingestion_channel": "DEMO_FIXTURE",
+    "state": "TRIAGED",
+    "severity": "GREEN",
+    "deterministic_risk_score": 28,
+    "forensics": {
+      "verdict": "VERIFIED_GOV",
+      "fraud_risk_score": 0,
+      "sender_email": "intimations@cpc.incometax.gov.in",
+      "sender_domain": "cpc.incometax.gov.in",
+      "dkim_passed": true,
+      "spf_passed": true,
+      "din_extracted": "DIN: ITBA/AST/S/143",
+      "din_format_valid": true,
+      "scam_flags": [],
+      "safe_to_process": true,
+      "verification_note": "Simulated fixture signals. DIN format is not live portal verification."
+    },
+    "limitation": {
+      "date_of_issue": "2026-10-03",
+      "date_of_service": "2026-10-04",
+      "statutory_window_days": 30,
+      "raw_expiry_date": "2026-11-03",
+      "holiday_rollover_applied": false,
+      "holiday_reason": null,
+      "effective_legal_deadline": "2026-11-03",
+      "days_remaining": 10,
+      "next_watchdog_alert": "T-7 · 2026-10-27 · 09:00 IST",
+      "requires_review": true,
+      "calculation_note": "Planning estimate. Confirm the prescribed period, service date and applicable office calendar."
+    },
+    "triage": {
+      "issuing_authority": "Centralized Processing Centre, Income Tax Department",
+      "notice_type_title": "Income tax return intimation",
+      "statutory_act_and_section": "Section 143(1) · Income Tax Act, 1961",
+      "plain_english_summary": "Your ITR-3 for AY 2026–27 has been processed. An interest recalculation shows a difference of ₹1,840. Compare the computation with your return and confirm any outstanding demand directly on the official portal before acting.",
+      "core_allegation_or_query": "Your ITR-3 for AY 2026–27 has been processed. An interest recalculation shows a difference of ₹1,840. Compare the computation with your return and confirm any outstanding demand directly on the official portal before acting.",
+      "financial_demand_inr": 1840.0,
+      "date_of_issue_iso": "2026-10-03",
+      "response_window_days": 30,
+      "has_criminal_or_arrest_clause": false,
+      "has_bank_freeze_or_eway_block_threat": false,
+      "recommended_professional": "Owner review",
+      "professional_reason": "Start by comparing the computation with the filed return; seek a CA if you disagree.",
+      "required_documents": [
+        {
+          "doc_id": "doc-1",
+          "document_name": "Filed ITR & computation",
+          "why_needed": "Allows comparison with the processing intimation.",
+          "source_hint": "Income tax portal → Filed returns → AY 2026–27.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-2",
+          "document_name": "Tax payment challans",
+          "why_needed": "Verifies credit for amounts already paid.",
+          "source_hint": "Income tax portal → Payment history.",
+          "is_collected": false,
+          "attachment_name": null
+        }
+      ],
+      "draft_reply_template": "To,\nCentralized Processing Centre, Income Tax Department\n\nSubject: Response to ITR INTIMATION\nReference: [NOTICE_REFERENCE]\n\nRespected Sir / Madam,\n\nWe acknowledge receipt of the above communication on [DATE_OF_RECEIPT]. We submit the following for your consideration, subject to verification of the records.\n\n1. [FACTUAL_EXPLANATION_WITHOUT_UNVERIFIED_ADMISSIONS]\n2. [RECONCILIATION_OR_PAYMENT_DETAILS]\n3. Supporting records are indexed in the attached evidence list.\n\nWe request that the enclosed records be considered and an opportunity to clarify any remaining issues be provided.\n\nYours faithfully,\n[AUTHORIZED_SIGNATORY]\n[BUSINESS_NAME]\n[DATE]\n\nDRAFT FOR PROFESSIONAL REVIEW — verify all facts before signing or submission.",
+      "vernacular_summary_hindi": "AY 2026–27 का आपका ITR-3 प्रोसेस हो गया है। ब्याज की पुनर्गणना से ₹1,840 का अंतर है। अपने रिटर्न से गणना मिलाएँ और कार्रवाई से पहले आधिकारिक पोर्टल पर मांग की जाँच करें।"
+    },
+    "redacted_ocr_excerpt": "Centralized Processing Centre, Income Tax Department\nITR INTIMATION\nSection 143(1) · Income Tax Act, 1961\nDate of issue: 2026-10-03\nResponse within 30 days\nTotal demand: INR 1840\nDIN: ITBA/AST/S/143(1)/2026-27/1089432119(1)\nYour ITR-3 for AY 2026–27 has been processed. An interest recalculation shows a difference of ₹1,840. Compare the computation with your return and confirm any outstanding demand directly on the official portal before acting.\nPAN: [REDACTED_PAN_1]\nAadhaar: [REDACTED_AADHAAR_2]",
+    "pii_tokens_redacted_count": 2,
+    "is_demo": true,
+    "analysis_mode": "deterministic-demo",
+    "original_filename": "income-tax-143.txt",
+    "review_notes": [
+      "Demo reference date: 24 October 2026. Figures and identities are fictional."
+    ],
+    "draft_reply": null
+  },
+  {
+    "id": "epfo-14b",
+    "ingested_at": "2026-10-17T09:00:00+05:30",
+    "ingestion_channel": "DEMO_FIXTURE",
+    "state": "TRIAGED",
+    "severity": "AMBER",
+    "deterministic_risk_score": 64,
+    "forensics": {
+      "verdict": "VERIFIED_GOV",
+      "fraud_risk_score": 0,
+      "sender_email": "ro.pune@epfindia.gov.in",
+      "sender_domain": "epfindia.gov.in",
+      "dkim_passed": true,
+      "spf_passed": true,
+      "din_extracted": null,
+      "din_format_valid": false,
+      "scam_flags": [],
+      "safe_to_process": true,
+      "verification_note": "Simulated fixture signals. DIN format is not live portal verification."
+    },
+    "limitation": {
+      "date_of_issue": "2026-10-17",
+      "date_of_service": "2026-10-17",
+      "statutory_window_days": 15,
+      "raw_expiry_date": "2026-11-01",
+      "holiday_rollover_applied": true,
+      "holiday_reason": "Potential Sec. 10 adjustment: 2026-11-01 (Sunday)",
+      "effective_legal_deadline": "2026-11-02",
+      "days_remaining": 9,
+      "next_watchdog_alert": "T-7 · 2026-10-26 · 09:00 IST",
+      "requires_review": true,
+      "calculation_note": "Planning estimate. Confirm the prescribed period, service date and applicable office calendar."
+    },
+    "triage": {
+      "issuing_authority": "Regional Provident Fund Commissioner-II, Pune",
+      "notice_type_title": "Delayed PF remittance",
+      "statutory_act_and_section": "Sections 14B & 7Q · EPF & MP Act, 1952",
+      "plain_english_summary": "EPFO proposes ₹38,400 in damages and ₹14,200 in interest for late PF contributions between April and July 2026. Gather the ECRs and payment records, then prepare a representation with your advisor.",
+      "core_allegation_or_query": "EPFO proposes ₹38,400 in damages and ₹14,200 in interest for late PF contributions between April and July 2026. Gather the ECRs and payment records, then prepare a representation with your advisor.",
+      "financial_demand_inr": 52600.0,
+      "date_of_issue_iso": "2026-10-17",
+      "response_window_days": 15,
+      "has_criminal_or_arrest_clause": false,
+      "has_bank_freeze_or_eway_block_threat": false,
+      "recommended_professional": "Chartered Accountant",
+      "professional_reason": "Check the month-wise calculation and grounds for a representation with a professional.",
+      "required_documents": [
+        {
+          "doc_id": "doc-1",
+          "document_name": "ECR statements: April–July 2026",
+          "why_needed": "Identifies the contribution periods under review.",
+          "source_hint": "EPFO employer portal → ECR / Returns.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-2",
+          "document_name": "PF challans & payment receipts",
+          "why_needed": "Establishes the actual remittance dates.",
+          "source_hint": "EPFO employer portal → Payments → Challan history.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-3",
+          "document_name": "Month-wise delay explanation",
+          "why_needed": "Supports your representation on the proposed damages.",
+          "source_hint": "Payroll records and supporting correspondence.",
+          "is_collected": false,
+          "attachment_name": null
+        }
+      ],
+      "draft_reply_template": "To,\nRegional Provident Fund Commissioner-II, Pune\n\nSubject: Response to SHOW-CAUSE\nReference: [NOTICE_REFERENCE]\n\nRespected Sir / Madam,\n\nWe acknowledge receipt of the above communication on [DATE_OF_RECEIPT]. We submit the following for your consideration, subject to verification of the records.\n\n1. [FACTUAL_EXPLANATION_WITHOUT_UNVERIFIED_ADMISSIONS]\n2. [RECONCILIATION_OR_PAYMENT_DETAILS]\n3. Supporting records are indexed in the attached evidence list.\n\nWe request that the enclosed records be considered and an opportunity to clarify any remaining issues be provided.\n\nYours faithfully,\n[AUTHORIZED_SIGNATORY]\n[BUSINESS_NAME]\n[DATE]\n\nDRAFT FOR PROFESSIONAL REVIEW — verify all facts before signing or submission.",
+      "vernacular_summary_hindi": "अप्रैल से जुलाई 2026 के PF भुगतान में देरी पर EPFO ने ₹38,400 हर्जाना और ₹14,200 ब्याज प्रस्तावित किया है। ECR और भुगतान रिकॉर्ड इकट्ठा करके सलाहकार के साथ जवाब तैयार करें।"
+    },
+    "redacted_ocr_excerpt": "Regional Provident Fund Commissioner-II, Pune\nSHOW-CAUSE\nSections 14B & 7Q · EPF & MP Act, 1952\nDate of issue: 2026-10-17\nResponse within 15 days\nTotal demand: INR 52600\nEPFO proposes ₹38,400 in damages and ₹14,200 in interest for late PF contributions between April and July 2026. Gather the ECRs and payment records, then prepare a representation with your advisor.\nPAN: [REDACTED_PAN_1]\nAadhaar: [REDACTED_AADHAAR_2]",
+    "pii_tokens_redacted_count": 2,
+    "is_demo": true,
+    "analysis_mode": "deterministic-demo",
+    "original_filename": "epfo-14b.txt",
+    "review_notes": [
+      "Demo reference date: 24 October 2026. Figures and identities are fictional.",
+      "Office-closure extension is a demonstration assumption; obtain professional confirmation."
+    ],
+    "draft_reply": null
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "name": "docket-in",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "setup": "bash scripts/setup.sh",
+    "dev": "bash scripts/dev.sh",
+    "build": "npm --prefix frontend run build",
+    "typecheck": "npm --prefix frontend run typecheck",
+    "test": "PYTHONPATH=backend backend/.venv/bin/pytest -q backend/tests",
+    "android:build": "bash scripts/android-build.sh"
+  }
+}

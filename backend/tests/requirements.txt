@@ -1,0 +1,2 @@
+# Fixture rendering only. The deployed OCR service uses PDFium/pdfplumber.
+pymupdf==1.26.7

@@ -1,0 +1,163 @@
+[
+  {
+    "id": "gst-asmt-10",
+    "code": "GST",
+    "title": "Input tax credit mismatch",
+    "authority": "Office of the Superintendent, CGST Range-III, Mumbai",
+    "law": "Section 61 · CGST Act, 2017 · Rule 99(1)",
+    "form": "GST ASMT-10",
+    "amount": 142850,
+    "issue": "2026-10-14",
+    "service": "2026-10-15",
+    "window": 15,
+    "email": "superintendent.cgst@cbic.gov.in",
+    "din": "CBIC-20261067B892104432",
+    "summary": "Your GSTR-3B claims ₹1,42,850 more input tax credit than your GSTR-2B shows. Two suppliers — Apex Fasteners and Surya Packaging — filed their returns late. Reconcile the invoices and explain the difference to the GST officer.",
+    "hindi": "आपके GSTR-3B में GSTR-2B से ₹1,42,850 अधिक इनपुट टैक्स क्रेडिट है। दो आपूर्तिकर्ताओं ने रिटर्न देर से भरा है। बिलों का मिलान करके GST अधिकारी को अंतर का जवाब दें।",
+    "professional": "Chartered Accountant",
+    "reason": "Reconcile the credit difference with your CA before filing a response.",
+    "docs": [
+      [
+        "Invoice-wise ITC reconciliation",
+        "Explains the difference between GSTR-2B and GSTR-3B.",
+        "GST portal → Returns → GSTR-2B; reconcile with your books."
+      ],
+      [
+        "Supplier invoices & e-Way bills",
+        "Supports the purchases from Apex Fasteners and Surya Packaging.",
+        "Purchase register → supplier invoices for FY 2025–26, Q2."
+      ],
+      [
+        "Proof of supplier payments",
+        "Documents the dates and amounts paid to the suppliers.",
+        "Your bank → Account statement → relevant transactions."
+      ]
+    ],
+    "raw_text": "Office of the Superintendent, CGST Range-III, Mumbai\nGST ASMT-10\nSection 61 · CGST Act, 2017 · Rule 99(1)\nDate of issue: 2026-10-14\nResponse within 15 days\nTotal demand: INR 142850\nDIN: CBIC-20261067B892104432\nYour GSTR-3B claims ₹1,42,850 more input tax credit than your GSTR-2B shows. Two suppliers — Apex Fasteners and Surya Packaging — filed their returns late. Reconcile the invoices and explain the difference to the GST officer.\nPAN: ABCDE1234F\nAadhaar: 2345 6789 0123"
+  },
+  {
+    "id": "cheque-section-138",
+    "code": "LEGAL",
+    "title": "Cheque dishonour demand",
+    "authority": "Chambers of Adv. Rajeshwar Rao, Mumbai",
+    "law": "Section 138 · Negotiable Instruments Act, 1881",
+    "form": "LEGAL DEMAND",
+    "amount": 480000,
+    "issue": "2026-10-10",
+    "service": "2026-10-12",
+    "window": 15,
+    "email": "rao.legal.chambers@gmail.com",
+    "din": null,
+    "summary": "Cheque 048921 for ₹4,80,000 was returned for insufficient funds. The sender demands payment within 15 days of receipt. Take the notice and bank memo to an advocate promptly to assess payment or a response.",
+    "hindi": "₹4,80,000 का चेक 048921 अपर्याप्त राशि के कारण लौट गया। प्राप्ति के 15 दिनों के भीतर भुगतान की मांग है। नोटिस और बैंक मेमो लेकर तुरंत वकील से सलाह लें।",
+    "professional": "Advocate",
+    "reason": "A dishonoured cheque demand can involve criminal proceedings. Obtain advocate review promptly.",
+    "criminal": true,
+    "docs": [
+      [
+        "Notice & postal delivery record",
+        "Establishes the exact receipt date and demand.",
+        "Registered post envelope, tracking receipt and original notice."
+      ],
+      [
+        "Cheque copy & bank return memo",
+        "Records the instrument and stated reason for dishonour.",
+        "Bank branch → Cheque return memo."
+      ],
+      [
+        "Contract & payment correspondence",
+        "Helps the advocate assess the underlying liability.",
+        "Purchase agreement, invoices and correspondence."
+      ]
+    ],
+    "raw_text": "Chambers of Adv. Rajeshwar Rao, Mumbai\nLEGAL DEMAND\nSection 138 · Negotiable Instruments Act, 1881\nDate of issue: 2026-10-10\nResponse within 15 days\nTotal demand: INR 480000\nCheque 048921 for ₹4,80,000 was returned for insufficient funds. The sender demands payment within 15 days of receipt. Take the notice and bank memo to an advocate promptly to assess payment or a response.\nPAN: ABCDE1234F\nAadhaar: 2345 6789 0123"
+  },
+  {
+    "id": "gst-quishing",
+    "code": "FRAUD",
+    "title": "GST suspension payment scam",
+    "authority": "“GSTN Compliance & Enforcement Cell”",
+    "law": "Claimed Form GST REG-17",
+    "form": "REG-17 SPOOF",
+    "amount": 14999,
+    "issue": "2026-10-23",
+    "service": "2026-10-24",
+    "window": 1,
+    "email": "compliance-alert@gst-portal-verify.in",
+    "din": null,
+    "summary": "Pay ₹14,999 via QR code within 4 hours or GSTIN and bank account will be frozen immediately. upi://pay?pa=gst.penalty.desk@okicici&am=14999",
+    "hindi": "",
+    "professional": "Do not engage",
+    "reason": "",
+    "docs": [],
+    "raw_text": "“GSTN Compliance & Enforcement Cell”\nREG-17 SPOOF\nClaimed Form GST REG-17\nDate of issue: 2026-10-23\nResponse within 1 days\nTotal demand: INR 14999\nPay ₹14,999 via QR code within 4 hours or GSTIN and bank account will be frozen immediately. upi://pay?pa=gst.penalty.desk@okicici&am=14999\nPAN: ABCDE1234F\nAadhaar: 2345 6789 0123"
+  },
+  {
+    "id": "income-tax-143",
+    "code": "IT",
+    "title": "Income tax return intimation",
+    "authority": "Centralized Processing Centre, Income Tax Department",
+    "law": "Section 143(1) · Income Tax Act, 1961",
+    "form": "ITR INTIMATION",
+    "amount": 1840,
+    "issue": "2026-10-03",
+    "service": "2026-10-04",
+    "window": 30,
+    "email": "intimations@cpc.incometax.gov.in",
+    "din": "ITBA/AST/S/143(1)/2026-27/1089432119(1)",
+    "summary": "Your ITR-3 for AY 2026–27 has been processed. An interest recalculation shows a difference of ₹1,840. Compare the computation with your return and confirm any outstanding demand directly on the official portal before acting.",
+    "hindi": "AY 2026–27 का आपका ITR-3 प्रोसेस हो गया है। ब्याज की पुनर्गणना से ₹1,840 का अंतर है। अपने रिटर्न से गणना मिलाएँ और कार्रवाई से पहले आधिकारिक पोर्टल पर मांग की जाँच करें।",
+    "professional": "Owner review",
+    "reason": "Start by comparing the computation with the filed return; seek a CA if you disagree.",
+    "docs": [
+      [
+        "Filed ITR & computation",
+        "Allows comparison with the processing intimation.",
+        "Income tax portal → Filed returns → AY 2026–27."
+      ],
+      [
+        "Tax payment challans",
+        "Verifies credit for amounts already paid.",
+        "Income tax portal → Payment history."
+      ]
+    ],
+    "raw_text": "Centralized Processing Centre, Income Tax Department\nITR INTIMATION\nSection 143(1) · Income Tax Act, 1961\nDate of issue: 2026-10-03\nResponse within 30 days\nTotal demand: INR 1840\nDIN: ITBA/AST/S/143(1)/2026-27/1089432119(1)\nYour ITR-3 for AY 2026–27 has been processed. An interest recalculation shows a difference of ₹1,840. Compare the computation with your return and confirm any outstanding demand directly on the official portal before acting.\nPAN: ABCDE1234F\nAadhaar: 2345 6789 0123"
+  },
+  {
+    "id": "epfo-14b",
+    "code": "EPFO",
+    "title": "Delayed PF remittance",
+    "authority": "Regional Provident Fund Commissioner-II, Pune",
+    "law": "Sections 14B & 7Q · EPF & MP Act, 1952",
+    "form": "SHOW-CAUSE",
+    "amount": 52600,
+    "issue": "2026-10-17",
+    "service": "2026-10-17",
+    "window": 15,
+    "email": "ro.pune@epfindia.gov.in",
+    "din": null,
+    "summary": "EPFO proposes ₹38,400 in damages and ₹14,200 in interest for late PF contributions between April and July 2026. Gather the ECRs and payment records, then prepare a representation with your advisor.",
+    "hindi": "अप्रैल से जुलाई 2026 के PF भुगतान में देरी पर EPFO ने ₹38,400 हर्जाना और ₹14,200 ब्याज प्रस्तावित किया है। ECR और भुगतान रिकॉर्ड इकट्ठा करके सलाहकार के साथ जवाब तैयार करें।",
+    "professional": "Chartered Accountant",
+    "reason": "Check the month-wise calculation and grounds for a representation with a professional.",
+    "rollover": true,
+    "docs": [
+      [
+        "ECR statements: April–July 2026",
+        "Identifies the contribution periods under review.",
+        "EPFO employer portal → ECR / Returns."
+      ],
+      [
+        "PF challans & payment receipts",
+        "Establishes the actual remittance dates.",
+        "EPFO employer portal → Payments → Challan history."
+      ],
+      [
+        "Month-wise delay explanation",
+        "Supports your representation on the proposed damages.",
+        "Payroll records and supporting correspondence."
+      ]
+    ],
+    "raw_text": "Regional Provident Fund Commissioner-II, Pune\nSHOW-CAUSE\nSections 14B & 7Q · EPF & MP Act, 1952\nDate of issue: 2026-10-17\nResponse within 15 days\nTotal demand: INR 52600\nEPFO proposes ₹38,400 in damages and ₹14,200 in interest for late PF contributions between April and July 2026. Gather the ECRs and payment records, then prepare a representation with your advisor.\nPAN: ABCDE1234F\nAadhaar: 2345 6789 0123"
+  }
+]

@@ -1,0 +1,178 @@
+[
+  {
+    "id": "gst-asmt-10",
+    "form": "GST ASMT-10",
+    "triage": {
+      "issuing_authority": "Office of the Superintendent, CGST Range-III, Mumbai",
+      "notice_type_title": "Input tax credit mismatch",
+      "statutory_act_and_section": "Section 61 · CGST Act, 2017 · Rule 99(1)",
+      "plain_english_summary": "Your GSTR-3B claims ₹1,42,850 more input tax credit than your GSTR-2B shows. Two suppliers — Apex Fasteners and Surya Packaging — filed their returns late. Reconcile the invoices and explain the difference to the GST officer.",
+      "core_allegation_or_query": "Your GSTR-3B claims ₹1,42,850 more input tax credit than your GSTR-2B shows. Two suppliers — Apex Fasteners and Surya Packaging — filed their returns late. Reconcile the invoices and explain the difference to the GST officer.",
+      "financial_demand_inr": 142850.0,
+      "date_of_issue_iso": "2026-10-14",
+      "response_window_days": 15,
+      "has_criminal_or_arrest_clause": false,
+      "has_bank_freeze_or_eway_block_threat": false,
+      "recommended_professional": "Chartered Accountant",
+      "professional_reason": "Reconcile the credit difference with your CA before filing a response.",
+      "required_documents": [
+        {
+          "doc_id": "doc-1",
+          "document_name": "Invoice-wise ITC reconciliation",
+          "why_needed": "Explains the difference between GSTR-2B and GSTR-3B.",
+          "source_hint": "GST portal → Returns → GSTR-2B; reconcile with your books.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-2",
+          "document_name": "Supplier invoices & e-Way bills",
+          "why_needed": "Supports the purchases from Apex Fasteners and Surya Packaging.",
+          "source_hint": "Purchase register → supplier invoices for FY 2025–26, Q2.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-3",
+          "document_name": "Proof of supplier payments",
+          "why_needed": "Documents the dates and amounts paid to the suppliers.",
+          "source_hint": "Your bank → Account statement → relevant transactions.",
+          "is_collected": false,
+          "attachment_name": null
+        }
+      ],
+      "draft_reply_template": "To,\nOffice of the Superintendent, CGST Range-III, Mumbai\n\nSubject: Response to GST ASMT-10\nReference: [NOTICE_REFERENCE]\n\nRespected Sir / Madam,\n\nWe acknowledge receipt of the above communication on [DATE_OF_RECEIPT]. We submit the following for your consideration, subject to verification of the records.\n\n1. [FACTUAL_EXPLANATION_WITHOUT_UNVERIFIED_ADMISSIONS]\n2. [RECONCILIATION_OR_PAYMENT_DETAILS]\n3. Supporting records are indexed in the attached evidence list.\n\nWe request that the enclosed records be considered and an opportunity to clarify any remaining issues be provided.\n\nYours faithfully,\n[AUTHORIZED_SIGNATORY]\n[BUSINESS_NAME]\n[DATE]\n\nDRAFT FOR PROFESSIONAL REVIEW — verify all facts before signing or submission.",
+      "vernacular_summary_hindi": "आपके GSTR-3B में GSTR-2B से ₹1,42,850 अधिक इनपुट टैक्स क्रेडिट है। दो आपूर्तिकर्ताओं ने रिटर्न देर से भरा है। बिलों का मिलान करके GST अधिकारी को अंतर का जवाब दें।"
+    }
+  },
+  {
+    "id": "cheque-section-138",
+    "form": "LEGAL DEMAND",
+    "triage": {
+      "issuing_authority": "Chambers of Adv. Rajeshwar Rao, Mumbai",
+      "notice_type_title": "Cheque dishonour demand",
+      "statutory_act_and_section": "Section 138 · Negotiable Instruments Act, 1881",
+      "plain_english_summary": "Cheque 048921 for ₹4,80,000 was returned for insufficient funds. The sender demands payment within 15 days of receipt. Take the notice and bank memo to an advocate promptly to assess payment or a response.",
+      "core_allegation_or_query": "Cheque 048921 for ₹4,80,000 was returned for insufficient funds. The sender demands payment within 15 days of receipt. Take the notice and bank memo to an advocate promptly to assess payment or a response.",
+      "financial_demand_inr": 480000.0,
+      "date_of_issue_iso": "2026-10-10",
+      "response_window_days": 15,
+      "has_criminal_or_arrest_clause": true,
+      "has_bank_freeze_or_eway_block_threat": false,
+      "recommended_professional": "Advocate",
+      "professional_reason": "A dishonoured cheque demand can involve criminal proceedings. Obtain advocate review promptly.",
+      "required_documents": [
+        {
+          "doc_id": "doc-1",
+          "document_name": "Notice & postal delivery record",
+          "why_needed": "Establishes the exact receipt date and demand.",
+          "source_hint": "Registered post envelope, tracking receipt and original notice.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-2",
+          "document_name": "Cheque copy & bank return memo",
+          "why_needed": "Records the instrument and stated reason for dishonour.",
+          "source_hint": "Bank branch → Cheque return memo.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-3",
+          "document_name": "Contract & payment correspondence",
+          "why_needed": "Helps the advocate assess the underlying liability.",
+          "source_hint": "Purchase agreement, invoices and correspondence.",
+          "is_collected": false,
+          "attachment_name": null
+        }
+      ],
+      "draft_reply_template": "To,\nChambers of Adv. Rajeshwar Rao, Mumbai\n\nSubject: Response to LEGAL DEMAND\nReference: [NOTICE_REFERENCE]\n\nRespected Sir / Madam,\n\nWe acknowledge receipt of the above communication on [DATE_OF_RECEIPT]. We submit the following for your consideration, subject to verification of the records.\n\n1. [FACTUAL_EXPLANATION_WITHOUT_UNVERIFIED_ADMISSIONS]\n2. [RECONCILIATION_OR_PAYMENT_DETAILS]\n3. Supporting records are indexed in the attached evidence list.\n\nWe request that the enclosed records be considered and an opportunity to clarify any remaining issues be provided.\n\nYours faithfully,\n[AUTHORIZED_SIGNATORY]\n[BUSINESS_NAME]\n[DATE]\n\nDRAFT FOR PROFESSIONAL REVIEW — verify all facts before signing or submission.",
+      "vernacular_summary_hindi": "₹4,80,000 का चेक 048921 अपर्याप्त राशि के कारण लौट गया। प्राप्ति के 15 दिनों के भीतर भुगतान की मांग है। नोटिस और बैंक मेमो लेकर तुरंत वकील से सलाह लें।"
+    }
+  },
+  {
+    "id": "income-tax-143",
+    "form": "ITR INTIMATION",
+    "triage": {
+      "issuing_authority": "Centralized Processing Centre, Income Tax Department",
+      "notice_type_title": "Income tax return intimation",
+      "statutory_act_and_section": "Section 143(1) · Income Tax Act, 1961",
+      "plain_english_summary": "Your ITR-3 for AY 2026–27 has been processed. An interest recalculation shows a difference of ₹1,840. Compare the computation with your return and confirm any outstanding demand directly on the official portal before acting.",
+      "core_allegation_or_query": "Your ITR-3 for AY 2026–27 has been processed. An interest recalculation shows a difference of ₹1,840. Compare the computation with your return and confirm any outstanding demand directly on the official portal before acting.",
+      "financial_demand_inr": 1840.0,
+      "date_of_issue_iso": "2026-10-03",
+      "response_window_days": 30,
+      "has_criminal_or_arrest_clause": false,
+      "has_bank_freeze_or_eway_block_threat": false,
+      "recommended_professional": "Owner review",
+      "professional_reason": "Start by comparing the computation with the filed return; seek a CA if you disagree.",
+      "required_documents": [
+        {
+          "doc_id": "doc-1",
+          "document_name": "Filed ITR & computation",
+          "why_needed": "Allows comparison with the processing intimation.",
+          "source_hint": "Income tax portal → Filed returns → AY 2026–27.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-2",
+          "document_name": "Tax payment challans",
+          "why_needed": "Verifies credit for amounts already paid.",
+          "source_hint": "Income tax portal → Payment history.",
+          "is_collected": false,
+          "attachment_name": null
+        }
+      ],
+      "draft_reply_template": "To,\nCentralized Processing Centre, Income Tax Department\n\nSubject: Response to ITR INTIMATION\nReference: [NOTICE_REFERENCE]\n\nRespected Sir / Madam,\n\nWe acknowledge receipt of the above communication on [DATE_OF_RECEIPT]. We submit the following for your consideration, subject to verification of the records.\n\n1. [FACTUAL_EXPLANATION_WITHOUT_UNVERIFIED_ADMISSIONS]\n2. [RECONCILIATION_OR_PAYMENT_DETAILS]\n3. Supporting records are indexed in the attached evidence list.\n\nWe request that the enclosed records be considered and an opportunity to clarify any remaining issues be provided.\n\nYours faithfully,\n[AUTHORIZED_SIGNATORY]\n[BUSINESS_NAME]\n[DATE]\n\nDRAFT FOR PROFESSIONAL REVIEW — verify all facts before signing or submission.",
+      "vernacular_summary_hindi": "AY 2026–27 का आपका ITR-3 प्रोसेस हो गया है। ब्याज की पुनर्गणना से ₹1,840 का अंतर है। अपने रिटर्न से गणना मिलाएँ और कार्रवाई से पहले आधिकारिक पोर्टल पर मांग की जाँच करें।"
+    }
+  },
+  {
+    "id": "epfo-14b",
+    "form": "SHOW-CAUSE",
+    "triage": {
+      "issuing_authority": "Regional Provident Fund Commissioner-II, Pune",
+      "notice_type_title": "Delayed PF remittance",
+      "statutory_act_and_section": "Sections 14B & 7Q · EPF & MP Act, 1952",
+      "plain_english_summary": "EPFO proposes ₹38,400 in damages and ₹14,200 in interest for late PF contributions between April and July 2026. Gather the ECRs and payment records, then prepare a representation with your advisor.",
+      "core_allegation_or_query": "EPFO proposes ₹38,400 in damages and ₹14,200 in interest for late PF contributions between April and July 2026. Gather the ECRs and payment records, then prepare a representation with your advisor.",
+      "financial_demand_inr": 52600.0,
+      "date_of_issue_iso": "2026-10-17",
+      "response_window_days": 15,
+      "has_criminal_or_arrest_clause": false,
+      "has_bank_freeze_or_eway_block_threat": false,
+      "recommended_professional": "Chartered Accountant",
+      "professional_reason": "Check the month-wise calculation and grounds for a representation with a professional.",
+      "required_documents": [
+        {
+          "doc_id": "doc-1",
+          "document_name": "ECR statements: April–July 2026",
+          "why_needed": "Identifies the contribution periods under review.",
+          "source_hint": "EPFO employer portal → ECR / Returns.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-2",
+          "document_name": "PF challans & payment receipts",
+          "why_needed": "Establishes the actual remittance dates.",
+          "source_hint": "EPFO employer portal → Payments → Challan history.",
+          "is_collected": false,
+          "attachment_name": null
+        },
+        {
+          "doc_id": "doc-3",
+          "document_name": "Month-wise delay explanation",
+          "why_needed": "Supports your representation on the proposed damages.",
+          "source_hint": "Payroll records and supporting correspondence.",
+          "is_collected": false,
+          "attachment_name": null
+        }
+      ],
+      "draft_reply_template": "To,\nRegional Provident Fund Commissioner-II, Pune\n\nSubject: Response to SHOW-CAUSE\nReference: [NOTICE_REFERENCE]\n\nRespected Sir / Madam,\n\nWe acknowledge receipt of the above communication on [DATE_OF_RECEIPT]. We submit the following for your consideration, subject to verification of the records.\n\n1. [FACTUAL_EXPLANATION_WITHOUT_UNVERIFIED_ADMISSIONS]\n2. [RECONCILIATION_OR_PAYMENT_DETAILS]\n3. Supporting records are indexed in the attached evidence list.\n\nWe request that the enclosed records be considered and an opportunity to clarify any remaining issues be provided.\n\nYours faithfully,\n[AUTHORIZED_SIGNATORY]\n[BUSINESS_NAME]\n[DATE]\n\nDRAFT FOR PROFESSIONAL REVIEW — verify all facts before signing or submission.",
+      "vernacular_summary_hindi": "अप्रैल से जुलाई 2026 के PF भुगतान में देरी पर EPFO ने ₹38,400 हर्जाना और ₹14,200 ब्याज प्रस्तावित किया है। ECR और भुगतान रिकॉर्ड इकट्ठा करके सलाहकार के साथ जवाब तैयार करें।"
+    }
+  }
+]

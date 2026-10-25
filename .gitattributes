@@ -1,0 +1,9 @@
+* text=auto
+*.sh text eol=lf
+android/gradlew text eol=lf
+*.bat text eol=crlf
+*.jar binary
+*.ttf binary
+*.png binary
+# Preserve the distributed upstream font license verbatim.
+backend/tests/fonts/OFL.txt whitespace=-blank-at-eol

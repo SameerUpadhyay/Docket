@@ -1,0 +1,199 @@
+{
+  "document_id": "1bc179544cc64c2fbd59cab25ecc70e2",
+  "filename": "bilingual-digital.pdf",
+  "page_count": 1,
+  "extraction_engine_used": "pdf-text-hybrid",
+  "image_quality_score": 1043.13,
+  "deskew_angle_applied": 0.0,
+  "table_math_verified": true,
+  "table_math_discrepancy_note": "Printed row and grand totals agree arithmetically; source recognition still requires review.",
+  "urgency": "RED",
+  "deterministic_anchors": {
+    "din_numbers": [
+      "CBIC-20261077Z901234567"
+    ],
+    "gstin_numbers": [
+      "27AABCU9603R1ZM"
+    ],
+    "pan_numbers": [],
+    "sections_cited": [
+      "धारा 73",
+      "Section 73"
+    ],
+    "dates_detected_iso": [
+      "2026-10-15"
+    ],
+    "qr_payloads": [],
+    "upi_ids_detected": [],
+    "devanagari_chars_present": true
+  },
+  "structured_triage": {
+    "detected_languages": [
+      "Hindi",
+      "English"
+    ],
+    "notice_domain": "GST_NOTICE",
+    "specific_form_code": "Form GST DRC-01",
+    "issuing_authority_name": null,
+    "issuing_authority_location": null,
+    "din_or_reference_id": "CBIC-20261077Z901234567",
+    "date_of_issue_iso": "2026-10-15",
+    "response_window_days": 15,
+    "explicit_due_date_iso": null,
+    "statutory_sections_invoked": [
+      "धारा 73",
+      "Section 73"
+    ],
+    "core_allegation_english": "The document appears to be Form GST DRC-01. A labelled amount of INR 160,000.00 was found. A printed 15-day period was detected. Confirm the allegation, service date and applicability with the original and a professional.",
+    "core_allegation_hindi": "यह दस्तावेज़ Form GST DRC-01 से संबंधित हो सकता है। इसमें INR 160,000.00 की लेबल की गई राशि मिली है। 15 दिन की अवधि लिखी मिली है। मूल नोटिस से तथ्य, प्राप्ति की तारीख और लागू कानून की जाँच करें।",
+    "tax_breakdown_table": [
+      {
+        "tax_head": "CGST",
+        "tax_or_principal_inr": "65000.00",
+        "interest_inr": "8500.00",
+        "penalty_inr": "6500.00",
+        "late_fee_inr": "0.00",
+        "row_total_inr": "80000.00",
+        "page_number": 1,
+        "provenance": "source-grid"
+      },
+      {
+        "tax_head": "SGST",
+        "tax_or_principal_inr": "65000.00",
+        "interest_inr": "8500.00",
+        "penalty_inr": "6500.00",
+        "late_fee_inr": "0.00",
+        "row_total_inr": "80000.00",
+        "page_number": 1,
+        "provenance": "source-grid"
+      }
+    ],
+    "total_demand_inr": "160000.00",
+    "threatens_bank_attachment_or_eway_block": true,
+    "threatens_criminal_prosecution": false,
+    "recommended_action_tier": "PROFESSIONAL_REVIEW",
+    "required_documents_checklist": [
+      "Original notice and proof of receipt",
+      "Records supporting the relevant tax period or transaction",
+      "A verified reconciliation and submission acknowledgement"
+    ],
+    "draft_reply_skeleton": "To [ISSUING_AUTHORITY]\nReference: CBIC-20261077Z901234567\n[VERIFIED_FACTS]\n[RECONCILIATION_AND_SUPPORTING_RECORDS]\n[PROFESSIONAL_REVIEW_BEFORE_SIGNING]",
+    "full_markdown_transcript": "FICTIONAL OCR BENCHMARK - NOT A LEGAL NOTICE\nका\nकार्यालय अधीक्षक, केंद्रीय माल और सेवा कर (CGST)\nOﬃce of the Superintendent, Central Goods and Services Tax\nDIN: CBIC-20261077Z901234567\nदिनांक: १५/१०/२०२६\nGSTIN: 27AABCU9603R1ZM\nFORM GST DRC-01\nकारण बताओ नोटिस - धारा ७३ (Section 73 of CGST Act, 2017)\nTax Period: FY 2025-26 (Q2)\nGSTR-3B और GSTR-2B के म\nमिलान में इनपुट टैक्स क्रेडिट\nक्रेडिट का अंतर पाया गया।\nDiscrepancy in Input Tax Credit reconciliation.\nTax Head\nTax\nInterest\nPenalty\nLate Fee\nTotal\nCGST\n65,000\n8,500\n6,500\n0\n80,000\nSGST\n65,000\n8,500\n6,500\n0\n80,000\nGrand Total Demand: INR 1,60,000\nĒाËत\nɥ\nके १५ दिन के भीतर अपना स्पष्टीकरण प्रस्तुत करें।\nPlease respond within 15 days of receipt.\nAn e-way bill block is stated; conﬁrm applicability with a professional.\n\nReconstructed table from page 1 (check the source):\n| Tax Head | Tax | Interest | Penalty | Late Fee | Total |\n| CGST | 65,000 | 8,500 | 6,500 | 0 | 80,000 |\n| SGST | 65,000 | 8,500 | 6,500 | 0 | 80,000 |",
+    "key_highlights": [
+      {
+        "label": "DIN / reference",
+        "extracted_value": "CBIC-20261077Z901234567",
+        "page_number": 1,
+        "box_2d": [
+          158,
+          69,
+          177,
+          345
+        ],
+        "provenance": "native-text"
+      },
+      {
+        "label": "GSTIN",
+        "extracted_value": "27AABCU9603R1ZM",
+        "page_number": 1,
+        "box_2d": [
+          221,
+          69,
+          240,
+          309
+        ],
+        "provenance": "native-text"
+      },
+      {
+        "label": "Section",
+        "extracted_value": "धारा 73",
+        "page_number": 1,
+        "box_2d": [
+          294,
+          69,
+          313,
+          538
+        ],
+        "provenance": "source-ocr-recovery"
+      },
+      {
+        "label": "Section",
+        "extracted_value": "Section 73",
+        "page_number": 1,
+        "box_2d": [
+          294,
+          69,
+          313,
+          538
+        ],
+        "provenance": "source-ocr-recovery"
+      },
+      {
+        "label": "Total demand",
+        "extracted_value": "160000.00",
+        "page_number": 1,
+        "box_2d": [
+          557,
+          69,
+          576,
+          371
+        ],
+        "provenance": "native-text"
+      },
+      {
+        "label": "Response period / date",
+        "extracted_value": "के 15 दिन के भीतर अपना स्पष्टीकरण प्रस्तुत करें।",
+        "page_number": 1,
+        "box_2d": [
+          591,
+          105,
+          608,
+          434
+        ],
+        "provenance": "source-ocr-recovery"
+      },
+      {
+        "label": "Response period / date",
+        "extracted_value": "Please respond within 15 days of receipt.",
+        "page_number": 1,
+        "box_2d": [
+          620,
+          69,
+          639,
+          428
+        ],
+        "provenance": "native-text"
+      }
+    ]
+  },
+  "processing_latency_ms": 4030,
+  "review_required": true,
+  "warnings": [
+    "Page 1: independent reference-number reads disagreed; confirm the DIN/GSTIN character by character."
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "engine": "pdf-text-hybrid",
+      "characters": 770,
+      "word_count": 127,
+      "mean_confidence": null,
+      "low_confidence_words": 0,
+      "critical_regions": [],
+      "flags": [
+        "REFERENCE_OCR_READINGS_DISAGREE",
+        "NATIVE_GLYPH_TEXT_RECOVERED_REQUIRES_REVIEW",
+        "CONFIDENCE_UNAVAILABLE"
+      ],
+      "language_coverage": [
+        "en",
+        "hi"
+      ],
+      "qr_checked": true,
+      "elapsed_ms": 3415,
+      "perspective_corrected": false,
+      "deskew_angle": 0.0,
+      "sharpness": 1043.13
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+[
+  {"ParameterKey":"DomainName","ParameterValue":"REPLACE.app-domain.in"},
+  {"ParameterKey":"EmailDomain","ParameterValue":"REPLACE.email-domain.in"},
+  {"ParameterKey":"HostedZoneId","ParameterValue":"REPLACE_ROUTE53_ZONE_ID"},
+  {"ParameterKey":"SenderEmail","ParameterValue":"notices@REPLACE.email-domain.in"},
+  {"ParameterKey":"SupportEmail","ParameterValue":"support@REPLACE.email-domain.in"},
+  {"ParameterKey":"AlertEmail","ParameterValue":""},
+  {"ParameterKey":"ApiImageUri","ParameterValue":"public.ecr.aws/docker/library/python:3.14-slim"},
+  {"ParameterKey":"WebImageUri","ParameterValue":"public.ecr.aws/docker/library/node:24-slim"},
+  {"ParameterKey":"GeminiSecretArn","ParameterValue":""},
+  {"ParameterKey":"DesiredCount","ParameterValue":"0"},
+  {"ParameterKey":"DatabaseMultiAZ","ParameterValue":"false"}
+]
