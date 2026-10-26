@@ -1,19 +1,28 @@
 # Docket
 
-**A business notice workspace for Indian small businesses**, formerly LawChakra. Docket brings notices, evidence, response preparation and advisor review into a native Android app and a web companion.
+**A fire alarm for legal fires.** An early-warning notice workspace for Indian small businesses.
 
-This is an **account-enabled pilot**, not a publicly deployed or legally certified service. The current Android build is `0.5.3-email-fixes`. Legal facts, authenticity and deadlines require human confirmation.
+Built by **Team Artemis** for **Srujana Hackathon 2026 · LS-05: Notice on the Desk**. Formerly LawChakra.
 
-**Install on Android:** [Download the latest APK](https://github.com/SameerUpadhyay/Docket/raw/refs/heads/main/downloads/android/docket-debug.apk) · [Installation and backend connection](docs/android-installation.md). Repository access is required while this project is private. Sample cases work offline; business accounts and incoming mail require the backend.
+A GST notice, tax letter or legal demand can arrive while an owner is busy running the business. It may sit unread, or be left to someone else, until little time remains to respond. Docket connects that notice to useful action: understand the issue, check its urgency, gather evidence and prepare a response.
 
-## What you can do
+Docket is designed to be **set up once and kept ready**. Owners choose which emails to forward; paper notices and portal downloads can be scanned or uploaded. The **native Android app is the main product**, supported by a web companion.
 
-- **Organize notices:** upload documents or capture multiple pages on Android; track cases, evidence, drafts and filing acknowledgements.
-- **Read English and Hindi documents:** local OCR extracts text, fields, tables and QR signals for review. Missing or conflicting facts remain unconfirmed.
-- **Receive selected email:** forward matching notices through a Gmail rule to a configured receiving provider. Docket never requests access to your Gmail inbox.
-- **Work with advisors:** separate business workspaces, owner/editor/reviewer roles, invitations and revocable access.
-- **Control your data:** encrypted case/evidence storage, account export/deletion, and separate choices for original retention, cloud OCR, AI summaries and email reminders.
-- **Try samples:** Android sample workspaces work offline and remain separate from real accounts.
+It helps business owners spot what needs attention, accounts staff collect supporting documents, and CAs or lawyers review an organized brief. Professional judgment stays with the qualified advisor.
+
+**Current stage:** a working local prototype with real forwarded-email intake. The backend must remain running; always-on hosting and live outgoing alerts are still to be configured. The Android pilot build is `0.5.3-email-fixes`. Extracted facts, authenticity and legal deadlines require human confirmation.
+
+**Try it:** [Download the Android APK](https://github.com/SameerUpadhyay/Docket/releases/latest/download/docket-debug.apk) · [GitHub Releases](https://github.com/SameerUpadhyay/Docket/releases) · [Installation and backend connection](docs/android-installation.md). Explore fictional sample cases offline; business accounts and incoming mail require the backend.
+
+## From a notice to a next step
+
+1. **Set up:** connect a receiving address and review a selective Gmail rule. Docket does not request whole-inbox access.
+2. **Receive:** matching forwarded mail enters the workspace while the service runs; add paper notices or portal downloads by camera or file upload.
+3. **Understand:** review English/Hindi text, the apparent sender, law, amount, printed response period and warning signs. Missing facts stay unconfirmed.
+4. **Prepare:** check the original, confirm service and response-period facts, plan the deadline, collect evidence and prepare a reply structure for professional review.
+5. **Keep track:** maintain evidence, drafts and review history; export a brief and record the filing acknowledgement. Suspicious messages receive a separate safety review; warnings are not verdicts.
+
+Each business has a separate workspace with owner/editor/reviewer access. Case content and evidence are encrypted, with export/deletion controls and separate choices for original retention, cloud OCR, AI summaries and email reminders.
 
 ## Project layout
 
