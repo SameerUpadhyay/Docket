@@ -25,6 +25,15 @@ import java.io.File
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 class NativeUiTest {
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
+    private fun waitForBackgroundUi(condition: () -> Boolean) {
+        // Bitmap decoding and PDF writes run outside Compose's test clock. Their
+        // continuations resume on Robolectric's paused main looper, so drain it
+        // before checking UI state. Allow bounded headroom on shared CI runners.
+        compose.waitUntil(timeoutMillis = 30_000) {
+            org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle()
+            condition()
+        }
+    }
     private fun snapshot(name: String, dialog: Boolean = false) {
         compose.waitForIdle()
         // Draw the real Android view tree. PixelCopy/captureToImage relies on a
@@ -74,7 +83,7 @@ class NativeUiTest {
                 destination.outputStream().use { source.compress(Bitmap.CompressFormat.JPEG,92,it) };source.recycle()
                 camera.captured(destination)
             }
-            compose.waitUntil(15000) { org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle(); !camera.state.value.busy }
+            waitForBackgroundUi { !camera.state.value.busy }
         }
         capture();capture(blank = true)
         compose.runOnUiThread { camera.dismissRetake() }
@@ -88,7 +97,7 @@ class NativeUiTest {
         val original = camera.state.value.pages.first()
         compose.onNodeWithText("Page 1", substring = false).performClick()
         compose.onNodeWithText("Review page 1").performClick()
-        compose.waitUntil(10000) { compose.onAllNodesWithContentDescription("Full captured page").fetchSemanticsNodes().isNotEmpty() }
+        waitForBackgroundUi { compose.onAllNodesWithContentDescription("Full captured page").fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithText("Zoom in").performClick()
         snapshot("camera-page-review", dialog = true)
         compose.onNodeWithText("Done").performClick()
@@ -108,7 +117,7 @@ class NativeUiTest {
         snapshot("camera-page-queue")
         var document: File? = null
         compose.runOnUiThread { camera.submit { document = it } }
-        compose.waitUntil(10000) { org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle(); document != null && !camera.state.value.busy }
+        waitForBackgroundUi { document != null && !camera.state.value.busy }
         val store = NoticeStore(compose.activity)
         org.junit.Assert.assertTrue(store.selectedFile(Uri.fromFile(document!!)).first.endsWith(".pdf"))
         compose.runOnUiThread { camera.clear() }
@@ -126,7 +135,7 @@ class NativeUiTest {
             val model = ViewModelProvider(compose.activity)[DocketViewModel::class.java]
             compose.activity.setContent { DocketTheme { OcrDocumentInspector(notice, model, modal = false, close = {}) } }
         }
-        compose.waitUntil(10000) { compose.onAllNodesWithContentDescription("Original notice page 1").fetchSemanticsNodes().isNotEmpty() }
+        waitForBackgroundUi { compose.onAllNodesWithContentDescription("Original notice page 1").fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithText("Inspect document").assertIsDisplayed()
         compose.onNodeWithText("Printed totals agree arithmetically").assertExists()
         snapshot("ocr-source")
