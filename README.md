@@ -4,6 +4,8 @@
 
 This is an **account-enabled pilot**, not a publicly deployed or legally certified service. The current Android build is `0.5.3-email-fixes`. Legal facts, authenticity and deadlines require human confirmation.
 
+**Install on Android:** [Download the latest APK](https://github.com/SameerUpadhyay/Docket/raw/refs/heads/main/downloads/android/docket-debug.apk) · [Installation and backend connection](docs/android-installation.md). Repository access is required while this project is private. Sample cases work offline; business accounts and incoming mail require the backend.
+
 ## What you can do
 
 - **Organize notices:** upload documents or capture multiple pages on Android; track cases, evidence, drafts and filing acknowledgements.
@@ -64,7 +66,7 @@ Android builds need **JDK 17**, SDK platform **36**, and compatible Android buil
 npm run android:build:windows
 ```
 
-On macOS/Linux, use `npm run android:build`. The generated APK is `output/android/docket-debug.apk`; successful GitHub Actions Android jobs also publish a `docket-debug` artifact. APKs and signing keys are not committed.
+On macOS/Linux, use `npm run android:build`. The generated APK is `output/android/docket-debug.apk`; successful GitHub Actions Android jobs also publish a `docket-debug` artifact. A verified pilot APK and its checksum are included in [`downloads/android/`](downloads/android/). Build outputs and signing keys stay private.
 
 The APK does **not** contain the Python backend. For account access on a USB-authorized phone, keep the backend running and run:
 

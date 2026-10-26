@@ -1,26 +1,34 @@
-# Install the Docket pilot
+# Install Docket on Android
 
-`docket-debug.apk` is a native, debug-signed Android application, version **0.4.0-camera-pilot**. It supports Android 8.0/API26 and newer.
+[Download docket-debug.apk](https://github.com/SameerUpadhyay/Docket/raw/refs/heads/main/downloads/android/docket-debug.apk) — **0.5.3-email-fixes**, version code **8**, Android **8.0/API 26 or newer**, about **83 MiB**. The APK is included in this repository under `downloads/android/`, with its SHA-256 in `SHA256SUMS.txt`. You need repository access while the project is private.
 
-1. Copy the APK to your phone and open it using Android's installer. Allow installation from that specific source if Android asks.
-2. Launch **Docket**. Choose **Explore sample workspace** to try the fictional cases without a server.
-3. For your own business, keep the backend running, choose **Create account**, verify your email and sign in. New accounts start empty.
+1. Download the APK on your phone and open it with Android's installer. Allow installation from that specific source if prompted.
+2. Launch **Docket** and choose **Explore sample workspace** to try fictional notices offline.
+3. For your own business account and forwarded mail, connect to a running Docket backend, then sign in or create an account. The APK does not include a hosted server or mail-service credentials.
 
-For a USB-connected test phone:
+## Connect to the backend
+
+For a USB-connected, debugging-authorized phone, keep the backend running on your computer and run:
 
 ```sh
-adb install -r docket-debug.apk
+adb install -r downloads/android/docket-debug.apk
 adb reverse tcp:8000 tcp:8000
 ```
 
-Use `http://127.0.0.1:8000` in the welcome screen's Server connection. For local development without SMTP, verification/recovery/invitation messages are saved in the backend's private `app/data/dev-outbox` folder. They are not delivered emails. An independent public installation needs the deployed HTTPS backend and real mail delivery.
+Use `http://127.0.0.1:8000` under **Server connection** on the welcome screen. Without the ADB bridge, `127.0.0.1` refers to the phone itself. Remote use requires a deployed HTTPS backend. Repeat port forwarding after reconnecting the phone.
 
-The app groups Home, Notices, Deadlines and Workspace. Account settings group Business, Access and Privacy. Cases group Overview, Response and Files, with one review/filing/history screen.
+For development without SMTP/SES, verification, recovery and invitation messages are saved in the backend's private `app/data/dev-outbox` folder. They are not delivered email. Signup uses random, expiring codes; there is no hardcoded verification code. Real email delivery requires server configuration. Forwarded notices additionally require the receiving setup in [Account → Email](email-ingestion.md).
 
-Camera: allow access, capture each page, tap thumbnails to review/retake/reorder, then Submit pages. All pages become one document. Obvious blur/dark/blank shots prompt a retake. Language recognition is automatic; there is no paste-text option.
+## Updates and integrity
 
-For bilingual intake, capture pages in the app or choose a file, then read the document before confirming its dates and period. Open Files → Inspect OCR, fields & tables to compare source and extracted values. API source previews need original retention enabled before upload. Desktop scan benchmarks still show DIN recognition limitations; compare every critical field with the original. Cloud OCR is implemented but requires provider configuration, model access and separate owner consent.
+The pilot APK is debug signed. Updating over an APK signed by the same key normally preserves app data. Android may reject a build signed by a different key or with a lower version code. If the experimental 0.5.4 build is installed, an authorized ADB connection can attempt the restored build with `adb install -r -d downloads/android/docket-debug.apk`. Export device-only records before considering an uninstall: uninstalling removes private device data and Keystore access.
 
-The APK was built and signature checked; 29 Android tests and 57 backend tests pass. Physical-device installation, Keystore/OCR/file-picker/alarm execution and real AWS services still need acceptance. This is a pilot build, not a Play release. Keep required local records exported before uninstalling; uninstalling loses the app's private device data/Keystore access.
+Check the downloaded file against [SHA256SUMS.txt](../downloads/android/SHA256SUMS.txt). For example, from `downloads/android/` on macOS/Linux, run `sha256sum --check SHA256SUMS.txt`; in PowerShell, use `Get-FileHash ./docket-debug.apk -Algorithm SHA256`. CI checks the committed APK's checksum, signature and package/version before building and testing the Android source. The separately generated CI artifact can use a different runner debug key.
 
-Source and launch gates: `android/README.md`, `docs/production-pilot.md` and `deploy/aws/README.md` in the project.
+## Document intake and verification limits
+
+Capture multiple pages or choose a file, review the extraction, then confirm dates and response periods against the original. **Files → Inspect OCR, fields & tables** shows the analysis; API source previews require original retention enabled before upload. English/Hindi OCR and QR screening can miss information and need human review.
+
+The app groups Home, Notices, Deadlines, Workspace and Account, with case responses, evidence, review and filing records. It does not file legal responses or make payments automatically. Physical-device camera, OCR, Keystore, file-picker and notification behavior still require acceptance testing. This is a pilot debug build, not a Play Store release.
+
+See the [Android build guide](../android/README.md), [production setup](production-pilot.md) and [email intake guide](email-ingestion.md).
