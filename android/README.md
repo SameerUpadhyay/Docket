@@ -19,6 +19,8 @@ Backend sessions expire after 12 hours. Android stores opaque tokens and cache d
 
 ## Build and install
 
+Windows: run `npm run android:build:windows` from the repository root. The PowerShell helper configures the project-local JDK/SDK, runs the debug build and unit tests, and compiles the instrumentation APK. Use `. ./scripts/tools-env.ps1` in PowerShell before running `adb` or `android/gradlew.bat` directly. Android Studio is already installed on this development machine; open the `android` folder, select `.tools/android-sdk` as the SDK, and select the JDK 17 folder under `.tools/jdk17` as the Gradle JDK (paths relative to the repository root). Do not use a newer Studio-bundled JDK with this project's older Gradle wrapper.
+
 ```sh
 npm run android:build
 adb install -r output/android/docket-debug.apk
@@ -28,6 +30,10 @@ adb reverse tcp:8000 tcp:8000
 Use `http://127.0.0.1:8000` in Server connection for development. `http://10.0.2.2:8000` is also allowed in an emulator. Codes are written to the backend's private dev-outbox when SMTP is not configured. See [production setup](../docs/production-pilot.md).
 
 The build helper discovers JDK17+ and the Android SDK, runs Gradle assemble/tests and copies the debug APK and SHA-256. For Play, provide `DOCKET_API_ORIGIN` for the deployed HTTPS API and private upload-keystore environment settings and run `scripts/android-release.sh`. Release signing, store ownership and final listing/policy configuration must be supplied by the operator. No release private key is bundled.
+
+## Incoming email
+
+In authenticated API mode, open Account → Email to enable a receiving address, complete Google forwarding confirmation and save an inspectable Gmail filter. Incoming cases refresh while the app is visible; the app never polls your inbox. Development-only fictional messages exercise the same intake processor. Real delivery requires provider/domain/webhook configuration. See [email intake setup and privacy](../docs/email-ingestion.md). Incoming legal dates require confirmation before planning deadlines.
 
 ## Data and review
 
@@ -39,7 +45,7 @@ The build helper discovers JDK17+ and the Android SDK, runs Gradle assemble/test
 
 ## Bilingual OCR
 
-Capture multiple pages in the embedded camera or choose an existing file. Review/retake/reorder photos, then submit one PDF. Photo checks run off the UI thread; English/Hindi recognition is automatic. Pasted text and language selection were removed. See [camera flow and acceptance notes](../docs/camera-intake.md). Read the document to suggest fields before confirming dates and creating a case. Files → Inspect OCR, fields & tables opens source review with candidate locations, bilingual summaries and API table results. See [OCR architecture and current scan limitations](../docs/bilingual-ocr.md). Version **0.4.0-camera-pilot** (code 4).
+Capture multiple pages in the embedded camera or choose an existing file. Review/retake/reorder photos, then submit one PDF. Photo checks run off the UI thread; English/Hindi recognition is automatic. Pasted text and language selection were removed. See [camera flow and acceptance notes](../docs/camera-intake.md). Read the document to suggest fields before confirming dates and creating a case. Files → Inspect OCR, fields & tables opens source review with candidate locations, bilingual summaries and API table results. See [OCR architecture and current scan limitations](../docs/bilingual-ocr.md). Version **0.5.3-email-fixes** (code 8).
 
 ## Verification limits
 

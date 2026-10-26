@@ -170,6 +170,8 @@ def evidence(notice_id):
 
 def delete_case(notice_id):
     with connect() as db:
+        from app.email_pipeline.store import forget_case
+        forget_case(db,scope.get(),notice_id)
         for row in db.execute('SELECT content FROM files_v2 WHERE workspace=? AND notice_id=?',(scope.get(),notice_id)).fetchall(): objects.queue_delete(db,row['content'])
         for table in ('files_v2','history','reminder_jobs'):
             db.execute(f'DELETE FROM {table} WHERE workspace=? AND notice_id=?',(scope.get(),notice_id))

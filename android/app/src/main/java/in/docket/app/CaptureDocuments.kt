@@ -6,6 +6,8 @@ import android.graphics.Matrix
 import android.media.ExifInterface
 import java.io.File
 import java.io.RandomAccessFile
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 import java.util.UUID
 import kotlin.math.*
 
@@ -48,13 +50,13 @@ object CaptureDocuments {
     /** Decode one bounded bitmap, apply all EXIF rotations/reflections, and strip metadata. */
     fun decode(file: File, maxEdge: Int = 2600): Bitmap {
         val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-        BitmapFactory.decodeFile(file.path, bounds)
+        file.inputStream().use { BitmapFactory.decodeStream(it, null, bounds) }
         require(bounds.outWidth > 0 && bounds.outHeight > 0 && bounds.outWidth.toLong() * bounds.outHeight <= 30_000_000) { "Use a photo smaller than 30 megapixels." }
         var sample = 1
         while (max(bounds.outWidth, bounds.outHeight) / (sample * 2) >= maxEdge) sample *= 2
-        var bitmap = BitmapFactory.decodeFile(file.path, BitmapFactory.Options().apply { inSampleSize = sample }) ?: error("The photo could not be opened. Retake it.")
+        var bitmap = file.inputStream().use { BitmapFactory.decodeStream(it, null, BitmapFactory.Options().apply { inSampleSize = sample }) } ?: error("The photo could not be opened. Retake it.")
         val matrix = Matrix()
-        when (runCatching { ExifInterface(file).getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL) }.getOrDefault(1)) {
+        when (runCatching { file.inputStream().use { ExifInterface(it).getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL) } }.getOrDefault(1)) {
             2 -> matrix.setScale(-1f, 1f)
             3 -> matrix.setRotate(180f)
             4 -> { matrix.setRotate(180f); matrix.postScale(-1f, 1f) }
@@ -78,7 +80,7 @@ object CaptureDocuments {
             val quality = PhotoChecks.assess(bitmap)
             if (!quality.accepted) return null to quality
             val temp = File(file.parentFile, "${UUID.randomUUID()}.normalized")
-            try { temp.outputStream().use { check(bitmap.compress(Bitmap.CompressFormat.JPEG, 90, it)) }; check(temp.renameTo(file)) { "Could not save this page. Retry capture." } }
+            try { temp.outputStream().use { check(bitmap.compress(Bitmap.CompressFormat.JPEG, 90, it)) }; Files.move(temp.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING) }
             finally { temp.delete() }
             val thumb = File(file.parentFile, "${file.nameWithoutExtension}.thumb.jpg")
             val scale = 200f / max(bitmap.width, bitmap.height)

@@ -39,6 +39,15 @@ jobs:
       - uses: actions/setup-java@v4
         with: {distribution: temurin, java-version: '17'}
       - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-36 build-tools;36.0.0'
+          log-accepted-android-sdk-licenses: false
+      - name: Verify downloadable APK
+        run: |
+          cd downloads/android
+          sha256sum --check SHA256SUMS.txt
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify docket-debug.apk
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging docket-debug.apk | grep -F "name='in.docket.app' versionCode='8' versionName='0.5.3-email-fixes'"
       - run: chmod +x android/gradlew && android/gradlew -p android :app:assembleDebug :app:testDebugUnitTest --console=plain
       - uses: actions/upload-artifact@v4
         with: {name: docket-debug, path: android/app/build/outputs/apk/debug/app-debug.apk}

@@ -49,6 +49,7 @@ class MainActivity : ComponentActivity() {
     val account by vm.account.collectAsState()
     val demo by vm.demo.collectAsState()
     if (account == null && !demo) { AuthScreen(vm, busy, message); return }
+    IncomingEmailUpdates(vm, account?.optJSONObject("workspace")?.text("id").orEmpty())
     var accountOpen by remember { mutableStateOf(false) }
     if (accountOpen) { AccountScreen(vm, busy) { accountOpen = false }; return }
     val context = LocalContext.current

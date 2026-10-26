@@ -8,6 +8,7 @@
     "build": "npm --prefix frontend run build",
     "typecheck": "npm --prefix frontend run typecheck",
     "test": "PYTHONPATH=backend backend/.venv/bin/pytest -q backend/tests",
-    "android:build": "bash scripts/android-build.sh"
+    "android:build": "bash scripts/android-build.sh",
+    "android:build:windows": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/android-build.ps1"
   }
 }

@@ -18,14 +18,14 @@ def classify(text,anchors):
     return NoticeDomain.UNCLASSIFIED,'Unclassified notice · professional review'
 
 COLUMN_PATTERNS={
- 'tax_head':r'tax\s*head|head|कर\s*शीर्ष',
+ 'tax_head':r'tax\s*head|head|^act$|कर\s*शीर्ष',
  'tax_or_principal_inr':r'^tax(?:\s*(?:amount|principal))?$|principal|मूल|^कर$',
  'interest_inr':r'interest|ब्याज',
  'penalty_inr':r'penalty|दंड|शास्ति',
  'late_fee_inr':r'late\s*fee|विलंब',
  'row_total_inr':r'total|योग|कुल',
 }
-def parse_grids(layout):
+def parse_grids(layout,printed_totals=None):
     rows=[]; warnings=[]
     for page in layout:
         for grid in page.get('tables',[]):
@@ -39,9 +39,17 @@ def parse_grids(layout):
                         if re.search(pattern,value) and key not in mapping: mapping[key]=column
                 if 'tax_head' in mapping and len(mapping)>=3: header=mapping; start=i+1; break
             if not header:
-                warnings.append(f"Page {page['page']}: table column labels could not be established."); continue
+                # Reference/date boxes are grids too, but are not failed tax tables.
+                labels=' '.join(str(cell or '') for cells in grid[:3] for cell in cells)
+                if len(re.findall(r'\btax\b|\binterest\b|\bpenalty\b|\btotal\b|ब्याज|शास्ति|कुल',labels,re.I))>=2:
+                    warnings.append(f"Page {page['page']}: table column labels could not be established.")
+                continue
             for cells in grid[start:]:
                 at=lambda key: cells[header[key]] if key in header and header[key]<len(cells) else None
+                if any(re.fullmatch(r'\s*(?:grand\s+total|total|कुल|योग)\s*',str(cell or ''),re.I) for cell in cells):
+                    value=money(at('row_total_inr'))
+                    if printed_totals is not None and value is not None: printed_totals.append(value)
+                    continue
                 head=str(at('tax_head') or '').strip(' |')
                 if not head or re.search(r'grand|total|कुल|योग',head,re.I): continue
                 values={k:money(at(k)) for k in COLUMN_PATTERNS if k!='tax_head'}
@@ -96,21 +104,29 @@ def source_highlights(layout,anchors,total):
 def analyze_extraction(extraction,filename):
     text=normalize_indic_numerals(extraction.text); anchors=extract_deterministic_anchors(extraction.text,extraction.qr)
     domain,form=classify(text,anchors)
-    rows,warnings=parse_grids(extraction.layout)
+    printed_totals=[]
+    rows,warnings=parse_grids(extraction.layout,printed_totals)
     for page in extraction.quality.get('pages',[]):
         if 'LOW_CONFIDENCE' in page.get('flags',[]) or 'CRITICAL_TEXT_NEEDS_REVIEW' in page.get('flags',[]): warnings.append(f"Page {page['page']}: uncertain text/numbers were detected; verify references, dates and amounts in the source.")
         if 'REFERENCE_OCR_READINGS_DISAGREE' in page.get('flags',[]): warnings.append(f"Page {page['page']}: independent reference-number reads disagreed; confirm the DIN/GSTIN character by character.")
         if 'TEXT_LAYER_DISAGREEMENT' in page.get('flags',[]): warnings.append(f"Page {page['page']}: embedded text and visual OCR disagree. Compare the original before relying on either.")
         if 'CLOUD_UNAVAILABLE_LOCAL_FALLBACK' in page.get('flags',[]): warnings.append(f"Page {page['page']}: the cloud service was unavailable; the local fallback produced this result.")
     totals=re.findall(r'(?:grand\s+total(?:\s+demand)?|total\s+(?:demand|amount)|amount\s+(?:payable|demanded)|cheque\s+principal|कुल\s*(?:मांग|राशि|देय))\s*[:=]?\s*₹?\s*(\d[\d,]*(?:\.\d{1,2})?)',text,re.I)
-    distinct=list(dict.fromkeys(money(t) for t in totals if money(t) is not None))
+    distinct=list(dict.fromkeys([money(t) for t in totals if money(t) is not None]+printed_totals))
     total=distinct[0] if len(distinct)==1 else None
     if len(distinct)>1: warnings.append('Conflicting labelled totals; no single demand amount was accepted.')
     math_ok,math_note=verify_tax_table_arithmetic(rows,total)
-    periods=list(dict.fromkeys(int(m.group(1)) for m in re.finditer(r'(?<!\d)(\d{1,3})(?!\d)\s*(?:days\b|दिन(?![\u0900-\u097f]))',text,re.I) if 1<=int(m.group(1))<=365))
+    periods=list(dict.fromkeys(int(m.group(1)) for m in re.finditer(r'(?<!\d)(\d{1,3})(?!\d)\s*\)?\s*(?:days\b|दिन(?![\u0900-\u097f]))',text,re.I) if 1<=int(m.group(1))<=365))
     period=periods[0] if len(periods)==1 else None
     if len(periods)>1: warnings.append('Multiple printed day periods were found; confirm which one governs the required response.')
     issue=labelled_date(text,r'(?m:^\s*(?:date(?:\s+of\s+issue)?|issue\s+date|जारी\s+दिनांक|दिनांक))')
+    if issue is None:
+        # DRC layouts often put the explicitly labelled issue date beside the
+        # reference number. Do not promote dates in narrative/transaction rows.
+        header_dates=[match.group(1) for match in re.finditer(r'^\s*(?:Reference\s+No\.?|SCN\s+Reference\s+No\.?)\s*:[^\n]*?\bDate\s*:\s*('+REGEX_ANCHORS['date_raw'].pattern+r')',text,re.I|re.M)]
+        candidates=list(dict.fromkeys(date_iso(value) for value in header_dates if date_iso(value)))
+        if len(candidates)==1: issue=candidates[0]
+        elif len(candidates)>1: warnings.append('Conflicting reference-header dates; confirm the issue date against the original.')
     due=labelled_date(text,r'due\s+date|reply\s+by|respond\s+by|अंतिम\s+तिथि')
     criminal=domain==NoticeDomain.CHEQUE_BOUNCE_SEC138 or bool(re.search(r'criminal\s+prosecution|imprisonment|कारावास|आपराधिक',text,re.I))
     freeze=bool(re.search(r'bank\s+(?:account\s+)?(?:freeze|attachment)|e.?way\s+bill\s+(?:block|ब्लॉक)|कुर्क',text,re.I))
@@ -130,7 +146,7 @@ def analyze_extraction(extraction,filename):
                 transcript+='\n\nReconstructed table from page '+str(page['page'])+' (check the source):\n'+'\n'.join('| '+' | '.join(clean(cell) for cell in row)+' |' for row in grid)
     structured=VisionOcrStructuredOutput(detected_languages=languages,notice_domain=domain,specific_form_code=form,din_or_reference_id=anchors.din_numbers[0] if anchors.din_numbers else None,date_of_issue_iso=issue,response_window_days=period,explicit_due_date_iso=due,statutory_sections_invoked=anchors.sections_cited,core_allegation_english=en,core_allegation_hindi=hi,tax_breakdown_table=rows,total_demand_inr=total,threatens_bank_attachment_or_eway_block=freeze,threatens_criminal_prosecution=criminal,recommended_action_tier='ADVOCATE_REVIEW' if criminal else 'PROFESSIONAL_REVIEW',required_documents_checklist=['Original notice and proof of receipt','Records supporting the relevant tax period or transaction','A verified reconciliation and submission acknowledgement'],draft_reply_skeleton='To [ISSUING_AUTHORITY]\nReference: '+(anchors.din_numbers[0] if anchors.din_numbers else '[NOTICE_REFERENCE]')+'\n[VERIFIED_FACTS]\n[RECONCILIATION_AND_SUPPORTING_RECORDS]\n[PROFESSIONAL_REVIEW_BEFORE_SIGNING]',full_markdown_transcript=transcript,key_highlights=source_highlights(extraction.layout,anchors,total))
     pages=extraction.quality.get('pages',[]); sharp=[p['sharpness'] for p in pages if p.get('sharpness') is not None]
-    return CompleteOcrTriagePayload(document_id=uuid.uuid4().hex,filename=filename,page_count=extraction.quality.get('page_count',1),extraction_engine_used=' + '.join(dict.fromkeys(p['engine'] for p in pages)),image_quality_score=sum(sharp)/len(sharp) if sharp else None,deskew_angle_applied=max((abs(p.get('deskew_angle',0)) for p in pages),default=0),table_math_verified=math_ok,table_math_discrepancy_note=math_note,urgency=urgency,deterministic_anchors=anchors,structured_triage=structured,processing_latency_ms=extraction.quality.get('elapsed_ms',0),warnings=warnings,pages=pages)
+    return CompleteOcrTriagePayload(document_id=uuid.uuid4().hex,filename=filename,page_count=extraction.quality.get('page_count',1),extraction_engine_used=' + '.join(dict.fromkeys(p['engine'] for p in pages)),image_quality_score=sum(sharp)/len(sharp) if sharp else None,deskew_angle_applied=max((abs(p.get('deskew_angle',0)) for p in pages),default=0),table_math_verified=math_ok,table_math_discrepancy_note=math_note,urgency=urgency,deterministic_anchors=anchors,structured_triage=structured,processing_latency_ms=extraction.quality.get('elapsed_ms',0),warnings=list(dict.fromkeys(warnings)),pages=pages)
 
 def redact_analysis(analysis,mapping):
     # Reuse intake's exact redaction tokens for all nested transcripts/anchors.

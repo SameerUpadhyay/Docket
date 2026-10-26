@@ -8,6 +8,8 @@ import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -27,6 +29,7 @@ import androidx.core.content.ContextCompat
     var mail by rememberSaveable { mutableStateOf(false) }
     var about by rememberSaveable { mutableStateOf(false) }
     var url by rememberSaveable { mutableStateOf(vm.store.server) }
+    var sourceEmail by rememberSaveable { mutableStateOf("") }
     var address by rememberSaveable { mutableStateOf("") }
     var verified by rememberSaveable { mutableStateOf(false) }
     var reminders by remember { mutableStateOf(vm.store.preferences.getBoolean("reminders", false)) }
@@ -42,7 +45,7 @@ import androidx.core.content.ContextCompat
         item { Column(verticalArrangement = Arrangement.spacedBy(10.dp)) { Text("WORKSPACE & PRIVACY", style = MaterialTheme.typography.labelMedium, color = Muted); SurfaceCard {
             WorkspaceRow("Storage & API connection", "Choose device storage or your existing API", Icons.Outlined.Storage) { connection = true }
             HorizontalDivider(color = Hairline)
-            WorkspaceRow("Mail rules & privacy", "A selective Gmail filter, without mailbox access", Icons.Outlined.PrivacyTip) { mail = true }
+            WorkspaceRow("Mail rules & privacy", if (apiMode) "Set up selective forwarding in Account → Email" else "A selective Gmail filter, without mailbox access", Icons.Outlined.PrivacyTip) { if (apiMode) accountSettings() else mail = true }
         } } }
         item { Column(verticalArrangement = Arrangement.spacedBy(10.dp)) { Text("REMINDERS & HAND-OFF", style = MaterialTheme.typography.labelMedium, color = Muted); SurfaceCard {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -62,17 +65,18 @@ import androidx.core.content.ContextCompat
         OutlinedTextField(value = url, onValueChange = { url = it }, label = { Text("API server origin") }, singleLine = true, modifier = Modifier.fillMaxWidth())
         Text("For USB or emulator use: adb reverse tcp:8000 tcp:8000. Then use http://127.0.0.1:8000. Remote services require HTTPS; the API requires a verified account. Sign in from the welcome screen.", style = MaterialTheme.typography.bodySmall, color = Muted)
     } }, confirmButton = { TextButton(onClick = { vm.connect(url); connection = false }, enabled = !busy) { Text("Connect API") } }, dismissButton = { TextButton(onClick = { vm.deviceMode(); connection = false }, enabled = !busy) { Text("Use device storage") } })
-    if (mail) AlertDialog(onDismissRequest = { mail = false }, title = { Text("Your inbox stays yours") }, text = { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text("Docket does not request mailbox access or provide a receiving inbox. The rule forwards matching notices to an address you control.")
-        OutlinedTextField(value = address, onValueChange = { address = it; verified = false }, label = { Text("Forwarding email address") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
+    if (mail) AlertDialog(onDismissRequest = { mail = false }, title = { Text("Your inbox stays yours") }, text = { Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Text("This device-only rule forwards matching notices to a separate address you control. It does not import them into Docket. For automatic ingestion, sign in and use Account → Email with a connected receiving provider. Gmail cannot forward to itself, including dot and plus aliases.")
+        OutlinedTextField(value = sourceEmail, onValueChange = { sourceEmail = it; verified = false }, label = { Text("Gmail account you are importing into") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
+        OutlinedTextField(value = address, onValueChange = { address = it; verified = false }, label = { Text("Separate verified receiving address") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
         Row { Checkbox(checked = verified, onCheckedChange = { verified = it }); Text("I control this address and have verified it in Gmail Forwarding settings.", style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 10.dp).weight(1f)) }
         Text("Download the XML. In Gmail on a computer, open Settings → Filters and blocked addresses → Import filters. Review the matches before enabling forwarding.", style = MaterialTheme.typography.bodySmall, color = Muted)
-    } }, confirmButton = { TextButton(onClick = { runCatching { MailRules.generate(address) }.onSuccess { mailRule(address); mail = false }.onFailure { vm.notify(it.message.orEmpty()) } }, enabled = verified && address.contains('@')) { Text("Save Gmail rule") } }, dismissButton = { TextButton(onClick = { mail = false }) { Text("Close") } })
+    } }, confirmButton = { TextButton(onClick = { runCatching { MailRules.generate(address, sourceEmail) }.onSuccess { mailRule(address); mail = false }.onFailure { vm.notify(it.message.orEmpty()) } }, enabled = verified && sourceEmail.contains('@') && address.contains('@')) { Text("Save Gmail rule") } }, dismissButton = { TextButton(onClick = { mail = false }) { Text("Close") } })
     if (about) AlertDialog(onDismissRequest = { about = false }, title = { Text("Clear about our limits") }, text = { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text("Native Android · Kotlin + Jetpack Compose. Four supported notice playbooks, with five fictional sample cases.")
         Text("DIN format and mail headers are not verified signatures. Dates are planning estimates, not guaranteed extensions.")
         Text("Device OCR supports Latin text and QR codes. Regex redaction is not complete anonymization. Device data uses Android Keystore encryption. Account owners can opt in to encrypted original retention and external AI summaries on the server.")
-        Text("No legal filing, payment, cybercrime report, live mailbox ingestion or advisor message is submitted automatically. Optional API mode follows the server’s configuration.")
+        Text("No legal filing, payment, cybercrime report or advisor message is submitted automatically. Selective forwarded email intake requires owner setup in Account → Email and a configured receiving provider.")
     } }, confirmButton = { TextButton(onClick = { about = false }) { Text("Got it") } })
 }
 @Composable private fun WorkspaceRow(title: String, subtitle: String, image: androidx.compose.ui.graphics.vector.ImageVector, onClick: () -> Unit) {

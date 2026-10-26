@@ -218,6 +218,8 @@ def delete_account(body:Password,request:Request,response:Response):
         if not row or not password_matches(body.password,row['password']): raise HTTPException(401,'Password is incorrect.')
         owned=tx.execute('SELECT id FROM workspaces WHERE owner_id=?',(user['id'],)).fetchall()
         for workspace_row in owned:
+            from app.email_pipeline.store import forget_workspace
+            forget_workspace(tx,workspace_row['id'])
             for file in tx.execute('SELECT content FROM files_v2 WHERE workspace=?',(workspace_row['id'],)).fetchall(): objects.queue_delete(tx,file['content'])
             for table in ('cases_v2','files_v2','history','invitations','reminder_jobs','preferences','ocr_preferences','members'):
                 tx.execute(f'DELETE FROM {table} WHERE workspace=?',(workspace_row['id'],))

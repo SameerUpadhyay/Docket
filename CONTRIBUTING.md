@@ -1,12 +1,12 @@
-# Working together on LawChakra / Docket
+# Working together on Docket
 
-Repository: https://github.com/SameerUpadhyay/LawChakra (private).
+Repository: https://github.com/SameerUpadhyay/Docket (private).
 
 Use your own GitHub account and a separate local clone. Accept the repository invitation before cloning. GitHub authentication is separate from app login; never share a GitHub token, account password, app session, signing key or `.env` file in chat or Git.
 
 ```sh
-git clone https://github.com/SameerUpadhyay/LawChakra.git
-cd LawChakra
+git clone https://github.com/SameerUpadhyay/Docket.git
+cd Docket
 ```
 
 Open your own clone in Codex or Android Studio. See [local setup](README.md), [Android build](android/README.md) and [OCR setup](docs/bilingual-ocr.md). `npm run setup` installs application dependencies; install a supported Tesseract runtime and its English/Hindi models for full OCR tests. Android needs JDK 17+ and an Android SDK. Each developer has their own development database and verification-email outbox; these are ignored by Git.
@@ -46,6 +46,6 @@ Run checks that match your change. Camera and ML Kit behavior also need a real A
 
 Commit source, locked dependencies, tests and fictional fixtures. Local databases, encrypted records and keys, development email, `.env` values, AWS credentials, Android signing material, downloaded runtimes/models, editor state and generated output are excluded. Do not add real notices or screenshots containing customer/account data to fixtures or issues. Use the hosting platform's secret manager for deployment credentials.
 
-The debug APK is generated at `output/android/docket-debug.apk`; GitHub Actions also uploads a `docket-debug` artifact on successful Android runs. Generated APKs, previews and benchmark reports are not versioned. Infrastructure templates are reviewable code and do not deploy AWS resources during tests.
+The debug APK is generated at `output/android/docket-debug.apk`; GitHub Actions also uploads a `docket-debug` artifact on successful Android runs. The reviewed pilot download in `downloads/android/` is the exception: update its APK and SHA-256 together, verify its signature/version, and update the CI version assertion and installation guide when publishing a new build. Other generated APKs, previews and benchmark reports are not versioned. Signing keys remain private. Infrastructure templates are reviewable code and do not deploy AWS resources during tests.
 
 No project-wide open-source license has been selected. This is a private collaboration repository; preserve dependency licenses, including the bundled test font's OFL notice, and review PyMuPDF licensing before public/proprietary distribution.

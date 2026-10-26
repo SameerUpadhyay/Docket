@@ -95,10 +95,18 @@ class CaseExporter(private val context: Context, private val store: NoticeStore)
 }
 
 object MailRules {
-    fun generate(address: String): String {
+    fun generate(address: String, sourceEmail: String = ""): String {
         require(Regex("[A-Za-z0-9._+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}").matches(address)) { "Enter a valid forwarding address." }
+        if (sourceEmail.isNotEmpty()) {
+            require(Regex("[A-Za-z0-9._+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}").matches(sourceEmail)) { "Enter the Gmail account you are importing into." }
+            fun mailbox(value: String): String {
+                val (local, domain) = value.lowercase(java.util.Locale.ROOT).split('@')
+                return if (domain == "gmail.com" || domain == "googlemail.com") local.substringBefore('+').replace(".", "") + "@gmail.com" else "$local@$domain"
+            }
+            require(mailbox(address) != mailbox(sourceEmail)) { "Gmail cannot forward to itself. Use a separate, verified receiving address. Dot and plus aliases still use the same Gmail mailbox." }
+        }
         fun escaped(text: String) = text.replace("&", "&amp;").replace("\"", "&quot;").replace("'", "&apos;").replace("<", "&lt;").replace(">", "&gt;")
-        val query = "from:(incometax.gov.in OR gst.gov.in OR cbic.gov.in OR mca.gov.in OR epfindia.gov.in OR esic.gov.in) OR subject:(\"Show Cause Notice\" OR \"Demand Notice\" OR \"Legal Notice\" OR \"Section 138\" OR \"ASMT-10\")"
+        val query = "from:(incometax.gov.in OR cpc.incometax.gov.in OR gst.gov.in OR gstn.org.in OR cbic.gov.in OR tdscpc.gov.in OR icegate.gov.in OR mca.gov.in OR epfindia.gov.in OR shramsuvidha.gov.in OR esic.gov.in OR esic.nic.in OR msme.gov.in OR fssai.gov.in OR itshubham3901@gmail.com OR upadhyaysameer09@gmail.com) OR subject:(\"Show Cause Notice\" OR \"Demand Notice\" OR \"Legal Notice\" OR \"Section 138\" OR \"DRC-01\" OR \"ASMT-10\" OR \"REG-17\" OR \"Intimation u/s\" OR \"कारण बताओ नोटिस\" OR \"विधिक नोटिस\")"
         return """<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:apps="http://schemas.google.com/apps/2006">
 <title>Docket notice filter</title><updated>${java.time.Instant.now()}</updated>

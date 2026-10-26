@@ -20,6 +20,32 @@ def test_devanagari_currency_dates_and_bounded_sections():
     assert 'धारा 73' in anchors.sections_cited
     assert 'Section 17' not in anchors.sections_cited
 
+
+def test_drc_reference_header_act_table_and_parenthesized_response_period():
+    from app.engines.triage_llm import local_triage
+    text='FORM GST DRC-01\nReference No: REF/2026/123   Date: 20/10/2026\nSection 73; input tax credit. Reply within thirty (30) days of this notice.'
+    layout=[{'page':1,'tables':[
+        [['Reference No:','REF/2026/123','Date:','20/10/2026']],
+        [['Sr.','Tax Period','Act','Tax','Interest','Penalty','Total'],
+         ['1','2022-23','CGST+SGST','50,000','5,000','5,000','60,000'],
+         ['','Total','','50,000','5,000','5,000','60,000']]]}]
+    result=analyze_extraction(Extraction(text,[],[],{'pages':[],'page_count':1},layout=layout),'notice.pdf')
+    observed=result.structured_triage
+    assert observed.date_of_issue_iso=='2026-10-20'
+    assert observed.response_window_days==30
+    assert observed.total_demand_inr==Decimal('60000')
+    assert observed.tax_breakdown_table[0].tax_head=='CGST+SGST'
+    assert observed.tax_breakdown_table[0].late_fee_inr is None
+    assert not any('column labels' in warning for warning in result.warnings)
+    assert 'Section 61' not in local_triage(text,None,None).statutory_act_and_section
+
+
+def test_conflicting_reference_header_dates_are_not_chosen():
+    text='FORM GST DRC-01\nReference No: REF/ONE   Date: 20/10/2026\nSCN Reference No.: REF/TWO   Date: 21/10/2026'
+    result=analyze_extraction(Extraction(text,[],[],{'pages':[]}),'notice.txt')
+    assert result.structured_triage.date_of_issue_iso is None
+    assert any('Conflicting reference-header dates' in warning for warning in result.warnings)
+
 @pytest.mark.skipif(not tesseract_command(),reason='Install bilingual local OCR runtime for live image checks.')
 def test_bilingual_gst_source_grid_and_actual_geometry():
     result=run_bilingual_ocr_and_triage(create_bilingual_gst_drc01_pdf(),'gst.pdf')
