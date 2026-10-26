@@ -2,7 +2,7 @@
 
 **A fire alarm for legal fires.** An early-warning notice workspace for Indian small businesses.
 
-Built by **Team Artemis** for **Srujana Hackathon 2026 · LS-05: Notice on the Desk**. Formerly LawChakra.
+Built by **Team Artemis** for **Srujana Hackathon 2026 · LS-05: Notice on the Desk**.
 
 A GST notice, tax letter or legal demand can arrive while an owner is busy running the business. It may sit unread, or be left to someone else, until little time remains to respond. Docket connects that notice to useful action: understand the issue, check its urgency, gather evidence and prepare a response.
 
