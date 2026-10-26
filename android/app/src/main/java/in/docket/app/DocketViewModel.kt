@@ -172,6 +172,10 @@ class DocketViewModel(application: Application) : AndroidViewModel(application) 
         if (store.connected) { val loaded = api().notices(); store.save(loaded, true); _notices.value = loaded; ReminderScheduler.reschedule(getApplication(), loaded) }
         else _notices.value = store.read(false)
     }
+    fun applyIncomingNotices(workspace: String, loaded: List<Notice>) {
+        // A delayed response must never replace a different business's screen.
+        if (_account.value != null && store.session.workspace == workspace) _notices.value = loaded
+    }
     fun export(notice: Notice, uri: Uri, type: String) = task {
         val bytes = if (store.connected) api().download(if (type == "zip") "/notices/${notice.id}/export-ca-brief" else if (type == "reply") "/notices/${notice.id}/reply.pdf" else "/notices/${notice.id}/report.pdf", if (type == "zip") "POST" else "GET") else CaseExporter(getApplication(), store).bytes(notice, type)
         getApplication<Application>().contentResolver.openOutputStream(uri)?.use { it.write(bytes) } ?: error("Could not write the export.")

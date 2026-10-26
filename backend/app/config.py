@@ -39,5 +39,7 @@ def validate_production():
     if not PUBLIC_URL.startswith('https://'): missing.append('HTTPS PUBLIC_URL')
     if not ALLOWED_ORIGINS or any(not x.startswith('https://') for x in ALLOWED_ORIGINS): missing.append('HTTPS ALLOWED_ORIGINS')
     if missing: raise RuntimeError('Production configuration missing: '+', '.join(missing))
+    from app.email_pipeline.store import validate_configuration
+    validate_configuration()
 
 def email_configured(): return MAIL_TRANSPORT=='ses' or bool(SMTP_HOST)

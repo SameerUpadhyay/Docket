@@ -65,6 +65,12 @@ def test_xml_escaping_and_validation():
     assert '"Legal Notice"' in props['hasTheWord']
     with pytest.raises(ValueError): generate_gmail_filter_xml("bad' /><evil>")
 
+@pytest.mark.parametrize('destination',['owner@gmail.com','o.w.n.e.r@gmail.com','Owner+notices@googlemail.com'])
+def test_filter_rejects_same_gmail_mailbox_and_aliases(destination):
+    with pytest.raises(ValueError,match='cannot forward to itself'):
+        generate_gmail_filter_xml(destination,'owner@gmail.com')
+    assert 'forwardTo' in generate_gmail_filter_xml('intake@business.in','owner@gmail.com')
+
 
 def test_section_number_matching_is_not_substring():
     data=json.loads((DATA_DIR/'statutory_playbooks.json').read_text())[0]['triage']

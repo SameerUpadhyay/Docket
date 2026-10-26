@@ -10,8 +10,8 @@ android {
         applicationId = "in.docket.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 4
-        versionName = "0.4.0-camera-pilot"
+        versionCode = 8
+        versionName = "0.5.3-email-fixes"
         val apiOrigin = (System.getenv("DOCKET_API_ORIGIN") ?: "http://127.0.0.1:8000").replace("\\", "\\\\").replace("\"", "\\\"")
         buildConfigField("String", "API_ORIGIN", "\"$apiOrigin\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

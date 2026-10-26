@@ -40,7 +40,7 @@ import org.json.JSONArray
         } } catch (e: Exception) { vm.notify(e.message.orEmpty()) }
     }
     Scaffold(topBar = { TopAppBar(title = { Text("Account & business") }, navigationIcon = { TextButton(onClick = back) { Text("Back") } }) }, containerColor = Canvas) { padding -> Column(Modifier.padding(padding)) {
-        TabRow(tab) { listOf("Business", "Access", "Privacy").forEachIndexed { index, title -> Tab(tab == index, { tab = index }, text = { Text(title) }) } }
+        TabRow(tab) { listOf("Business", "Access", "Privacy", "Email").forEachIndexed { index, title -> Tab(tab == index, { tab = index }, text = { Text(title) }) } }
         LazyColumn(contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
             if (!message.isNullOrBlank()) item { Text(message.orEmpty(), style = MaterialTheme.typography.bodyMedium, color = Navy) }
             when(tab) {
@@ -76,6 +76,10 @@ import org.json.JSONArray
                         } } }
                     }
                     item { SurfaceCard { Text("Active sessions", style = MaterialTheme.typography.titleMedium); sessions.forEach { Text(it.text("label"), style = MaterialTheme.typography.bodySmall, maxLines = 2) }; Text("Sessions expire after 12 hours. Password recovery revokes every device.", style = MaterialTheme.typography.bodySmall, color = Muted); OutlinedButton(onClick = { vm.signOut(true); back() }, enabled = !busy) { Text("Sign out all devices") } } }
+                }
+                3 -> {
+                    item { PageIntro("Incoming email", "Forward selected notices without connecting your inbox.") }
+                    item { if (owner) key(current.getJSONObject("workspace").text("id")) { EmailSettingsCard(vm, busy) } else SurfaceCard { Text("The business owner manages receiving addresses and forwarding confirmation. Incoming cases appear automatically in your notice list.") } }
                 }
                 2 -> {
                     item { PageIntro("Your data, your choices", "Optional processing is disabled until the owner enables it.") }

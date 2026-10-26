@@ -65,8 +65,8 @@ class LLMTriageExtraction(BaseModel):
     plain_english_summary: str
     core_allegation_or_query: str
     financial_demand_inr: float = Field(ge=0)
-    date_of_issue_iso: str
-    response_window_days: int = Field(ge=1,le=365)
+    date_of_issue_iso: str | None = None
+    response_window_days: int | None = Field(default=None,ge=1,le=365)
     has_criminal_or_arrest_clause: bool = False
     has_bank_freeze_or_eway_block_threat: bool = False
     recommended_professional: str
@@ -101,6 +101,7 @@ class CompleteNoticeDossier(BaseModel):
     ocr_analysis: CompleteOcrTriagePayload | None = None
     ocr_report: dict = Field(default_factory=dict)
     source_sha256: str | None = None
+    email_intake: dict = Field(default_factory=dict)
     playbook_version: str = '2026-10-25-unreviewed'
 
 class ChecklistUpdate(BaseModel):

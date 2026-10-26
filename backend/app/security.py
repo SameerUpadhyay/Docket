@@ -7,6 +7,8 @@ from app import auth,config
 from app.models import database as db
 logger=logging.getLogger('docket.requests')
 PUBLIC={'/api/health','/api/ready','/api/public/config','/api/public/privacy','/api/public/terms','/api/auth/register','/api/auth/login','/api/auth/verify','/api/auth/resend','/api/auth/forgot','/api/auth/reset'}
+# This one endpoint authenticates the receiving provider in its own handler.
+PUBLIC.add('/api/v1/email/inbound-webhook')
 
 async def security_boundary(request:Request,call_next):
     started=time.monotonic(); request_id=uuid.uuid4().hex

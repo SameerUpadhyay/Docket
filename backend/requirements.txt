@@ -17,3 +17,4 @@ numpy==2.5.4
 pdfplumber==0.11.10
 uharfbuzz==0.57.0
 pymupdf==1.26.7
+dkimpy[ARC,ed25519]==1.1.8

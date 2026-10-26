@@ -2,6 +2,7 @@ import type {Dossier} from './types';
 let workspace='';
 export function selectWorkspace(id:string){workspace=id;}
 function headers(extra?:HeadersInit){const value=new Headers(extra);value.set('X-Docket-Request','1');if(workspace)value.set('X-Workspace-ID',workspace);return value;}
+export function fetchApi(path:string,options?:RequestInit){return fetch('/api'+path,{...options,headers:headers(options?.headers),credentials:'same-origin',cache:'no-store'});}
 export async function request<T>(path:string,options?:RequestInit):Promise<T>{
  const response=await fetch('/api'+path,{...options,headers:headers(options?.headers),credentials:'same-origin',cache:'no-store'});
  if(!response.ok){const body=await response.json().catch(()=>({detail:'The server could not complete this request.'}));if(response.status===401&&!path.startsWith('/auth/login')||response.status===403&&String(body.detail).startsWith('Workspace access was revoked'))window.dispatchEvent(new Event('docket:session-ended'));throw new Error(typeof body.detail==='string'?body.detail:'Check the required fields and try again.');}

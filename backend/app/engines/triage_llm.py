@@ -7,6 +7,9 @@ def local_triage(text,issue,window):
     books=json.loads((DATA_DIR/'statutory_playbooks.json').read_text())
     patterns=[r'asmt.?10|gstr.?(?:2b|3b)|input tax credit',r'section\s*138|cheque|dishonou?r',r'143\s*\(1\)|itr.3|income tax',r'epfo|14b|provident fund|7q']
     chosen=next((book for book,pattern in zip(books,patterns) if re.search(pattern,text,re.I)),None)
+    # Input-tax-credit wording also occurs in DRC-01 show-cause notices. It is
+    # not evidence that the ASMT-10 / Section 61 response playbook applies.
+    if re.search(r'\bdrc\s*[-–]?\s*01\b',text,re.I): chosen=None
     if chosen:
         data=deepcopy(chosen['triage'])
         sample_authority=data['issuing_authority']

@@ -1,12 +1,12 @@
-# Working together on LawChakra / Docket
+# Working together on Docket
 
-Repository: https://github.com/SameerUpadhyay/LawChakra (private).
+Repository: https://github.com/SameerUpadhyay/Docket (private).
 
 Use your own GitHub account and a separate local clone. Accept the repository invitation before cloning. GitHub authentication is separate from app login; never share a GitHub token, account password, app session, signing key or `.env` file in chat or Git.
 
 ```sh
-git clone https://github.com/SameerUpadhyay/LawChakra.git
-cd LawChakra
+git clone https://github.com/SameerUpadhyay/Docket.git
+cd Docket
 ```
 
 Open your own clone in Codex or Android Studio. See [local setup](README.md), [Android build](android/README.md) and [OCR setup](docs/bilingual-ocr.md). `npm run setup` installs application dependencies; install a supported Tesseract runtime and its English/Hindi models for full OCR tests. Android needs JDK 17+ and an Android SDK. Each developer has their own development database and verification-email outbox; these are ignored by Git.

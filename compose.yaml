@@ -54,6 +54,21 @@ services:
     security_opt: [no-new-privileges:true]
     mem_limit: 256m
     networks: [private, outbound]
+  email-worker:
+    build: ./backend
+    command: [python, -m, app.workers.email_ingestion]
+    restart: unless-stopped
+    env_file: .env.production
+    environment:
+      CLAMAV_HOST: clamav
+    depends_on:
+      db: {condition: service_healthy}
+    read_only: true
+    tmpfs: [/tmp:size=512m,mode=1777]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 1g
+    networks: [private, outbound]
   web:
     build: ./frontend
     restart: unless-stopped

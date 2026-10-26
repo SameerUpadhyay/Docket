@@ -73,4 +73,10 @@ class RuleEngineTest {
         assertEquals(3, properties.length)
     }
     @Test(expected = IllegalArgumentException::class) fun gmailXmlRejectsInjection() { MailRules.generate("bad\"/><evil>") }
+    @Test fun gmailRuleRejectsSelfForwardingIncludingAliases() {
+        listOf("owner@gmail.com", "o.w.n.e.r@gmail.com", "Owner+notices@googlemail.com").forEach { destination ->
+            assertTrue(runCatching { MailRules.generate(destination, "owner@gmail.com") }.exceptionOrNull() is IllegalArgumentException)
+        }
+        assertTrue(MailRules.generate("intake@business.in", "owner@gmail.com").contains("forwardTo"))
+    }
 }

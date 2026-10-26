@@ -22,7 +22,7 @@ import org.json.JSONArray
     var tab by remember { mutableIntStateOf(0) }
     var issue by remember { mutableStateOf(notice.limitation?.text("date_of_issue").orEmpty()) }
     var service by remember { mutableStateOf(notice.limitation?.text("date_of_service").orEmpty()) }
-    var window by remember { mutableStateOf(notice.limitation?.optInt("statutory_window_days").toString()) }
+    var window by remember { mutableStateOf(notice.limitation?.optInt("statutory_window_days")?.toString().orEmpty()) }
     var amount by remember { mutableStateOf(notice.amount.toString()) }
     var authority by remember { mutableStateOf(notice.authority) }; var section by remember { mutableStateOf(notice.law) }
     var basis by remember { mutableStateOf("") }; var comment by remember { mutableStateOf("") }

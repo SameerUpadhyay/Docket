@@ -1,4 +1,5 @@
-import json,re,uuid,hashlib
+import json,re,uuid,hashlib,asyncio,os
+from contextlib import suppress
 from datetime import date,datetime,timezone
 from email import policy
 from email.parser import Parser
@@ -43,8 +44,31 @@ def seed():
 async def lifespan(app):
     config.validate_production()
     database.migrate()
+    from app.email_pipeline import store as email_store
+    from app.email_pipeline.processor import process_next
+    email_store.migrate()
     if config.DEMO_MODE: seed()
-    yield
+    async def recover_mail():
+        while True:
+            try: await asyncio.to_thread(process_next)
+            except Exception: pass
+            await asyncio.sleep(1)
+    worker=asyncio.create_task(recover_mail()) if os.getenv('INBOUND_INLINE_WORKER','0' if config.PRODUCTION else '1')=='1' else None
+    async def fetch_dedicated_inbox():
+        from app.email_pipeline.agentmail_receiver import poll_once
+        while True:
+            try: await asyncio.to_thread(poll_once)
+            except Exception: pass
+            await asyncio.sleep(15)
+    receiver=asyncio.create_task(fetch_dedicated_inbox()) if worker else None
+    try: yield
+    finally:
+        if worker:
+            worker.cancel()
+            with suppress(asyncio.CancelledError): await worker
+        if receiver:
+            receiver.cancel()
+            with suppress(asyncio.CancelledError): await receiver
 
 app=FastAPI(title='Docket · business notice workspace',lifespan=lifespan,docs_url=None if config.PRODUCTION else '/docs',redoc_url=None)
 app.add_middleware(BodyLimitMiddleware)
@@ -192,8 +216,8 @@ def state(notice_id:str,update:StateUpdate):
     return database.save(d)
 
 @app.get('/api/privacy/gmail-filter.xml')
-def gmail(webhook_email:str):
-    try: xml=generate_gmail_filter_xml(webhook_email)
+def gmail(webhook_email:str,source_email:str=''):
+    try: xml=generate_gmail_filter_xml(webhook_email,source_email)
     except ValueError as exc: raise HTTPException(422,str(exc))
     return Response(xml,media_type='application/xml',headers={'Content-Disposition':'attachment; filename="docket-gov-notice-filter.xml"'})
 
@@ -222,3 +246,6 @@ app.include_router(workspace_router)
 
 from app.ocr.pipeline_router import router as ocr_router
 app.include_router(ocr_router)
+
+from app.email_pipeline.email_router import router as email_router
+app.include_router(email_router)
